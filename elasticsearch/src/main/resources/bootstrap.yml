@@ -1,0 +1,28 @@
+spring:
+  data:
+    elasticsearch:
+      rest:
+        uris: 192.168.34.130:9300
+      #      cluster-nodes: 192.168.34.130:9300
+      repositories:
+        enabled: true
+  application:
+    name: service-elasticsearch
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: SERVICE-CONFIG-SERVER
+      fail-fast: true
+  profiles:
+    active: dev
+  eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka/
+#  servlet:
+#    context-path: /elsearch
+#    jsp:
+#      init-parameters:
+#        development: true
+
