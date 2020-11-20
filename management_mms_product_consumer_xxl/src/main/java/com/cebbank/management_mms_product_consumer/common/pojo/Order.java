@@ -58,5 +58,6 @@ public class Order {
      * 订单编号
      */
     private String orderUuid;
+    private String logisticsUuid;
 
 }
