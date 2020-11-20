@@ -3,18 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cebbank.user_login_provider.mapper.UserLoginMapper">
-<!--    &lt;!&ndash;根据手机号和密码查询登录用户&ndash;&gt;-->
-<!--    <select id="queryUserByPhoneAndPassword" resultType="com.cebbank.lsf.sbm.pojo.User">-->
-<!--        select `user_id`,`user_name`,`user_phone`,`user_password` from user where user_phone = #{phone} and user_password = #{password}-->
-<!--    </select>-->
-<!--    &lt;!&ndash;根据手机号查询用户&ndash;&gt;-->
-<!--    <select id="queryUserByPhone" resultType="com.cebbank.lsf.sbm.pojo.User">-->
-<!--        select `user_id`,`user_name`,`user_phone`,`user_password` from user where user_phone = #{phone}-->
-<!--    </select>-->
-<!--    &lt;!&ndash;新增用户&ndash;&gt;-->
-<!--    <insert id="saveUser" useGeneratedKeys="true" keyProperty="user_id">-->
-<!--        insert into user(`user_name`,`user_password`,`user_phone`) values(#{user_name},#{user_password},#{user_phone})-->
-<!--    </insert>-->
+
     <!--根据用户id查询用户-->
     <select id="selectUserLoginByUserLoginId" resultType="com.cebbank.user_login_provider.common.pojo.UserLogin">
         select `user_login_id`,`user_info_id`,`user_login_phone`,`user_login_password`,`user_login_status` from user_login where user_login_id = #{id}
@@ -23,5 +12,31 @@
     <select id="selectUserLoginByPhoneAndPassword" resultType="com.cebbank.user_login_provider.common.pojo.UserLogin">
         select `user_login_id`,`user_info_id`,`user_login_phone`,`user_login_password`,`user_login_status` from user_login where user_login_phone = #{phone} and user_login_password=#{password}
     </select>
+
+    <select id="selectUserLoginByPhone" resultType="com.cebbank.user_login_provider.common.pojo.UserLogin">
+        select `user_login_id`,`user_info_id`,`user_login_phone`,`user_login_password`,`user_login_status` from user_login where user_login_phone = #{phone}
+    </select>
+
+    <select id="selectUserLoginfoByUserLoginId" resultType="com.cebbank.user_login_provider.common.pojo.Userloginfo">
+        select ul.user_login_id,ul.user_info_id from user_login as ul inner join user_info  on ul.user_info_id = user_info.user_info_id where user_login_phone = #{phone}
+    </select>
+
+    <update id="updateUserLoginByPhone" parameterType="com.cebbank.user_login_provider.common.pojo.UserLogin">
+        update user_login SET `user_login_password`=#{password} WHERE user_login_phone = #{phone}
+    </update>
+
+    <insert id="saveUserLogin" parameterType="com.cebbank.user_login_provider.common.pojo.UserLogin">
+    insert into user_login (user_login_phone,user_login_password, user_info_id
+      )
+    values (#{userLoginPhone}, #{userLoginPassword},
+    #{userInfoId})
+  </insert>
+
+    <insert id="saveUserInfo" parameterType="com.cebbank.user_login_provider.common.pojo.UserInfo" useGeneratedKeys="true" keyProperty="userInfoId">
+    insert into user_info (user_info_name,user_info_phone
+      )
+    values (#{userInfoName}, #{userInfoPhone}
+      )
+  </insert>
 
 </mapper>

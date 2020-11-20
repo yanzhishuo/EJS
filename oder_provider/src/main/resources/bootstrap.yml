@@ -1,0 +1,19 @@
+server:
+  port: 7887
+spring:
+  application:
+    name: service-order-provider
+
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: SERVICE-CONFIG-SERVER
+      fail-fast: true
+      label: main
+      name: application
+      profile: main
+
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  config-location: classpath:mybatis/mybatis-config.xml

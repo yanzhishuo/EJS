@@ -1,0 +1,29 @@
+server:
+  port: 7889
+spring:
+  application:
+    name: service-order-consumer
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: SERVICE-CONFIG-SERVER
+      fail-fast: true
+      label: main
+      name: application
+      profile: main
+
+  mvc:
+    format:
+      date: yyyy-MM-dd
+    hiddenmethod:
+      filter:
+        enabled: true
+  thymeleaf:
+    cache: false
+
+
+
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  config-location: classpath:mybatis/mybatis-config.xml

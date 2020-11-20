@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cebbank.order_manage_provider.mapper.OrderMapper">
+<!--    没发货查不出来-->
+    <select id="selectDlOrder" resultType="com.cebbank.order_manage_provider.pojo.Order">
+    SELECT `order`.`order_id`,`user_login_id`,`order_payment`,
+    `order_consign_time`,`order_status`,`order_uuid`,`order_create_time`,
+    `order_update_time`,`logistics_uuid`
+    FROM `order`
+    INNER JOIN logistics ON `order`.`order_id`=`logistics`.`order_id`;
+    </select>
+    <update id="updateOrderStatus1" >
+		update `order` set order_status=4 where order_id=#{id};
+   	</update>
+    <update id="updateOrderStatus2">
+		update `order` set order_status=5 where order_id=#{id};
+    </update>
+    <update id="updateOrderUpdateTime">
+         update `order` set order_update_time=now() where order_id=#{orderId};
+    </update>
+    <select id="selectUDAllOrder" resultType="com.cebbank.order_manage_provider.pojo.Order">
+    select `order_id`,`user_login_id`,`order_payment`,
+    `order_consign_time`,`order_status`,`order_uuid`,`order_create_time`,
+    `order_update_time` from `order`  where `order_status`= 3 or `order_status`= 2 or `order_status`= 1;
+    </select>
+</mapper>

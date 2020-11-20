@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: service-buyer-consumer
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: SERVICE-CONFIG-SERVER
+      fail-fast: true
+      label: main
+      name: application
+      profile: main
+  profiles:
+    active: dev
+  #  redis
+  redis:
+    host: 121.196.107.230
+    port: 6379
+    client-name: root
+    password: 123456
+
+  #  缓存类型
+  cache:
+    type: redis
+
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  config-location: classpath:mybatis/mybatis-config.xml
+server:
+  port: 7778
+
+
+
+
+

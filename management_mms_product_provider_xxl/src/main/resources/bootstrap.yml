@@ -1,0 +1,40 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: service-mms-product-provider
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: SERVICE-CONFIG-SERVER
+      fail-fast: true
+      label: main
+      name: application
+      profile: main
+  #  mvc:
+  #    format:
+  #      date: yyyy-MM-dd
+  #    hiddenmethod:
+  #      filter:
+  #        enabled: true
+  profiles:
+    active: dev
+  main:
+    allow-bean-definition-overriding: true
+
+mybatis:
+  ## 指定全局配置文件位置
+  config-location: classpath:mybatis/mybatis-config.xml
+  ## 指定sql映射文件位置
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+# pagehelper
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+

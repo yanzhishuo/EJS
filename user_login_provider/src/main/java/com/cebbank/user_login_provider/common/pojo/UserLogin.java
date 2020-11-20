@@ -5,13 +5,16 @@ package com.cebbank.user_login_provider.common.pojo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
+
+import org.springframework.transaction.annotation.Transactional;
+
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors(chain = true)
-public class UserLogin {
+//@Accessors(chain = true)
+public class UserLogin implements Serializable {
 
     /**
      * 用户登录id
@@ -28,14 +31,14 @@ public class UserLogin {
     /**
      * 用户密码
      */
-    private String userLoginPassword;
+    private transient String userLoginPassword;
 
 //    private String userLoginCreateTime;
 //
 //    private String userLoginUpdateTime;
 
     /**
-     * 数据状态：1正常  0删除
+     * 数据状态：1常  0删除
      */
     private Integer userLoginStatus;
 }

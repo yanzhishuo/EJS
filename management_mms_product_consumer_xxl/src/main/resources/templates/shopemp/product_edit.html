@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<style>
+    #button1 {
+        width: 100px;
+        height: 30px;
+        background: #17a2b8;
+        border-color: #17a2b8;
+        border-radius: 5px;
+        font-size: 16px;
+        color: whitesmoke;
+    }
+
+    #button2 {
+        width: 120px;
+        height: 30px;
+        background: #6c757d;
+        border-color: #6c757d;
+        border-radius: 5px;
+        font-size: 16px;
+        color: whitesmoke;
+    }
+</style>
+<header th:replace="shopemp/header::header-fragment"></header>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- 引入页面头header-fragment -->
+    <div th:replace="shopemp/header::header-nav"></div>
+    <!-- 引入工具栏sidebar-fragment -->
+    <div th:replace="shopemp/sidebar::sidebar-fragment(${path})"></div>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- Main content -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">编辑商品信息</h3>
+                    </div>
+                    <div class="card-body">
+                        <!--                        <form id="productsForm" onsubmit="return false;">-->
+                        <!--                        <form id="productsForm" action="/shopemp/product/modify" method="post">-->
+                        <form id="productsForm" action="">
+                            <div class="form-group" style="display:flex;">
+                                <label class="control-label">商品分类:&nbsp;&nbsp;&nbsp;</label>
+                                <input type="text" name="productCategoryName" readonly="readonly"
+                                       th:value="${productCategoryName}"/>
+
+                            </div>
+                            <div class="form-group" style="display:flex;">
+                                <input type="hidden" id="productDetailId" name="productDetailId"
+                                       th:value="${productDetail.productDetailId}"/>
+                                <label class="control-label">货号:&nbsp;&nbsp;&nbsp;</label>
+                                <input type="text" class="form-control col-sm-6" name="productNo"
+                                       readonly="readonly" th:value="${productDetail.product.productNo}"/>
+                                &nbsp;&nbsp;
+                                <label class="control-label">名称:&nbsp;&nbsp;&nbsp;</label>
+                                <input type="text" class="form-control col-sm-6" name="productName"
+                                       readonly="readonly" th:value="${productDetail.product.productName}"/>
+                            </div>
+                            <div class="form-group" style="display:flex;">
+                                <label class="control-label">描述:&nbsp;&nbsp;&nbsp;</label>
+                                <input type="text" class="form-control col-sm-6" name="productDesc"
+                                       th:value="${productDetail.product.productDesc}"/>
+                                &nbsp;&nbsp;
+                                <label class="control-label">属性:&nbsp;&nbsp;&nbsp;</label>
+                                <input type="text" class="form-control col-sm-6" name="productPropertyValue"
+                                       readonly="readonly" th:value="${productDetail.productPropertyValue}"/>
+                            </div>
+                            <div class="form-group" style="display:flex;">
+                                <label class="control-label">价格:&nbsp;&nbsp;&nbsp;</label>
+                                <input type="number" class="form-control col-sm-6" name="productDetailPrice"
+                                       th:value="${productDetail.productDetailPrice}" required="true"/>
+                                &nbsp;&nbsp;
+                                <label class="control-label">库存:&nbsp;&nbsp;&nbsp;</label>
+                                <input type="number" class="form-control col-sm-6" name="productDetailStock"
+                                       th:value="${productDetail.productDetailStock}" required="true"/>
+                            </div>
+                            <br>
+                            <div>
+                                <input id="button1" type="submit" value="保存商品"
+                                       onclick="javascript:this.form.action='/shopemp/product/modify';"/>
+                                &nbsp;&nbsp;
+                                <input id="button2" type="submit" value="返回商品列表"
+                                       onclick="javascript:this.form.action='/shopemp/products';"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </div>
+    </div>
+    <!-- /.content-wrapper -->
+    <!-- 引入页脚footer-fragment -->
+    <div th:replace="shopemp/footer::footer-fragment"></div>
+</div>
+<!-- jQuery -->
+<script th:src="@{/shopemp/plugins/jquery/jquery.min.js}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script th:src="@{/shopemp/plugins/jQueryUI/jquery-ui.min.js}"></script>
+<!-- Bootstrap 4 -->
+<script th:src="@{/shopemp/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/shopemp/dist/js/adminlte.min.js}"></script>
+<!-- sweetalert -->
+<script th:src="@{/shopemp/plugins/sweetalert/sweetalert.min.js}"></script>
+<!-- ajaxupload -->
+<script th:src="@{/shopemp/plugins/ajaxupload/ajaxupload.js}"></script>
+<!-- wangEditor -->
+<script type="text/javascript" src="//unpkg.com/wangeditor/dist/wangEditor.min.js"></script>
+<!-- kindeditor -->
+<script th:src="@{/shopemp/dist/js/public.js}"></script>
+<script th:src="@{/shopemp/dist/js/newbee_mall_goods_edit.js}"></script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<style>
+    #button1 {
+        width: 100px;
+        height: 30px;
+        background: #17a2b8;
+        border-color: #17a2b8;
+        border-radius: 5px;
+        font-size: 16px;
+        color: whitesmoke;
+    }
+
+    #button2 {
+        width: 120px;
+        height: 30px;
+        background: #6c757d;
+        border-color: #6c757d;
+        border-radius: 5px;
+        font-size: 16px;
+        color: whitesmoke;
+    }
+</style>
+<header th:replace="shopemp/header::header-fragment"></header>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- 引入页面头header-fragment -->
+    <div th:replace="shopemp/header::header-nav"></div>
+    <!-- 引入工具栏sidebar-fragment -->
+    <div th:replace="shopemp/sidebar::sidebar-fragment(${path})"></div>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- Main content -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">新增商品信息</h3>
+                    </div>
+                    <div class="card-body">
+                        <!--                        <form id="productsForm" onsubmit="return false;">-->
+                        <!--                        <form id="productsForm" action="/shopemp/product/save" method="post">-->
+                        <form id="productsForm" action="">
+                            <div class="form-group" style="display:flex;">
+                                <label class="control-label">请选择分类:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                <select class="form-control col-sm-3" name="productCategoryId"
+                                        data-placeholder="请选择分类...">
+                                    <th:block th:unless="${null == firstLevelCategories}">
+                                        <th:block th:each="c : ${firstLevelCategories}">
+                                            <option th:value="${c.productCategoryId}"
+                                                    th:text="${c.productCategoryName}">
+                                            </option>
+                                        </th:block>
+                                    </th:block>
+                                </select>&nbsp;
+                            </div>
+                            <div class="form-group" style="display:flex;">
+                                <input type="hidden" id="productId" name="productId"/>
+                                <input type="text" class="form-control col-sm-6" id="productNo" name="productNo"
+                                       placeholder="*请输入商品货号" required="true"/>
+                                &nbsp;&nbsp;
+                                <input type="text" class="form-control col-sm-6" id="productName" name="productName"
+                                       placeholder="*请输入商品名称" required="true"/>
+                            </div>
+                            <div class="form-group" style="display:flex;">
+                                <input type="text" class="form-control col-sm-6" id="productDesc" name="productDesc"
+                                       placeholder="*请输入商品描述" required="true"/>
+                                &nbsp;&nbsp;
+                                <input type="text" class="form-control col-sm-6" id="productPropertyValue"
+                                       name="productPropertyValue"
+                                       placeholder="*请输入商品属性" required="true"/>
+                            </div>
+                            <div class="form-group" style="display:flex;">
+                                <input type="number" class="form-control col-sm-6" id="productDetailPrice"
+                                       name="productDetailPrice"
+                                       placeholder="*请输入商品价格" required="true"/>
+                                &nbsp;&nbsp;
+                                <input type="number" class="form-control col-sm-6" id="productDetailStock"
+                                       name="productDetailStock"
+                                       placeholder="*请输入商品库存数" required="true"/>
+                            </div>
+                            <!--                            <div class="form-group">-->
+                            <!--                                <label class="control-label">商品状态:&nbsp;</label>-->
+                            <!--                                <input name="productStatus" type="radio" checked=true value="1"/>&nbsp;待审核&nbsp;-->
+                            <!--                                <input name="productStatus" type="radio" value="2" />&nbsp;上架&nbsp;-->
+                            <!--                                <input name="productStatus" type="radio" value="3" />&nbsp;下架&nbsp;-->
+                            <!--                            </div>-->
+                            <!--                            <div class="form-group">-->
+                            <!-- 按钮 -->
+                            <!--                                <button class="btn btn-info float-right" style="margin-left: 5px;"-->
+                            <!--                                        id="saveButton">保存商品-->
+                            <!--                                </button>   -->
+                            <!--                                &nbsp-->
+                            <!--                                &nbsp;<button class="btn btn-secondary float-right" style="margin-left: 5px;"-->
+                            <!--                                              id="cancelButton">返回商品列表-->
+                            <!--                            </button>&nbsp;-->
+                            <!--                            </div>-->
+                            <br>
+                            <div>
+                                <input id="button1" type="submit" value="保存商品"
+                                       onclick="javascript:this.form.action='/shopemp/product/save';"/>
+                                &nbsp;&nbsp;
+                                <input id="button2" type="submit" value="返回商品列表"
+                                       onclick="javascript:this.form.action='/shopemp/products';"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </div>
+    </div>
+    <!-- /.content-wrapper -->
+    <!-- 引入页脚footer-fragment -->
+    <div th:replace="shopemp/footer::footer-fragment"></div>
+</div>
+<!-- jQuery -->
+<script th:src="@{/shopemp/plugins/jquery/jquery.min.js}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script th:src="@{/shopemp/plugins/jQueryUI/jquery-ui.min.js}"></script>
+<!-- Bootstrap 4 -->
+<script th:src="@{/shopemp/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/shopemp/dist/js/adminlte.min.js}"></script>
+<!-- sweetalert -->
+<script th:src="@{/shopemp/plugins/sweetalert/sweetalert.min.js}"></script>
+<!-- ajaxupload -->
+<script th:src="@{/shopemp/plugins/ajaxupload/ajaxupload.js}"></script>
+<!-- wangEditor -->
+<script type="text/javascript" src="//unpkg.com/wangeditor/dist/wangEditor.min.js"></script>
+<!-- kindeditor -->
+<script th:src="@{/shopemp/dist/js/public.js}"></script>
+<script th:src="@{/shopemp/dist/js/newbee_mall_goods_edit.js}"></script>
+</body>
+</html>

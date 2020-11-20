@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: service-ordermanage-provider
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: SERVICE-CONFIG-SERVER
+      fail-fast: true
+      label: main
+      name: application
+      profile: main
+  profiles:
+    active: dev
+server:
+  port: 8788
+
+
+mybatis:
+  #  #指定全局配置文件位置
+  config-location: classpath:mybatis/config/mybatis-config.xml
+  # 所有Entity别名类所在包
+  #  type-aliases-package: com.cebbank.logistics_provider.common.pojo
+  #指定sql映射文件位置
+  mapper-locations:
+    - classpath:mybatis/mapper/*.xml
+
+#eureka:
+#  client:
+#    service-url:
+#      default-zone: http://localhost:8761/eureka/

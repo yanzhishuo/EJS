@@ -6,13 +6,26 @@ spring:
 eureka:
   client:
     service-url:
-      default-zone: http://localhost:8761/eureka/
+      defaultZone: http://localhost:8761/eureka
 zuul:
-  # 补充
-#  routes:
-#    filmapi:
-#      path: /filmapi/film/**
-#      serviceId: service-film
-ribbon:
-  eureka:
-    enabled: true
+  # 忽略真实的服务名称实例访问，是一个Set集合，可以指定多个，取消全部使用 "*"即可
+  ignored-services:
+    - "*"
+
+  routes:
+    #    参数key结构： zuul.routes.customName.path=xxx
+    service-userloginprovider:
+      path: /userloginprovider/**
+      # 参数key结构： zuul.routes.customName.url=xxx
+      # url用于配置符合path的请求路径路由到的服务地址。
+      url: http://localhost:7777/
+      serviceId: service-buyer-provider
+
+    service-userloginconsumer:
+      path: /userloginconsumer/**
+      # 参数key结构： zuul.routes.customName.url=xxx
+      # url用于配置符合path的请求路径路由到的服务地址。
+      url: http://localhost:7778/
+      serviceId: service-buyer-consumers
+  prefix: /EJS
+  add-host-header: true

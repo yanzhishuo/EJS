@@ -1,6 +1,7 @@
 package com.cebbank.user_login_provider.service;
 
 
+import com.cebbank.user_login_provider.common.pojo.UserInfo;
 import com.cebbank.user_login_provider.common.pojo.UserLogin;
 
 public interface UserLoginService {
@@ -15,4 +16,21 @@ public interface UserLoginService {
      * @param :登录用户的手机号，密码
      */
     UserLogin findUserLoginByPhoneAndPassword(String phone,String password);
+    /*
+    功能：查找手机号是否存在
+     */
+    UserLogin findUserLoginByPhone(String phone);
+    /*
+    功能：忘记密码，更新密码
+     */
+    int modifyUserLoginByPhone(String phone,String password);
+    /**
+     * 用户注册
+     *
+     * @param
+     *
+     * @return
+     */
+    String register(UserLogin login, UserInfo userInfo );
+
 }

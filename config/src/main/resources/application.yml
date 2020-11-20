@@ -6,11 +6,16 @@ spring:
   cloud:
     config:
       server:
-        native:
-          search-locations: classpath:/shared
-  profiles:
-    active: native
+        git:
+          uri: https://github.com/yanzhishuo/xiaoyingresourses.git    #这个不要改 用闫志朔的仓库地址，里面配好了数据库
+          username: yanzhishuo
+          password: yzs19951208
+          search-paths:
+            - xiaoyingresourses  #搜索目录
+      label: main
+
 eureka:
   client:
     service-url:
-      default-zone: http://localhost:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
+

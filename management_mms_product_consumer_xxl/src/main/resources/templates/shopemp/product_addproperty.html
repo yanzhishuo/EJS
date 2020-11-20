@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script type="text/javascript" th:src="@{/shopemp/plugins/jquery/jquery.js}"></script>
+    <script>
+        $(function () {
+            //查询所有分类
+            $.post(
+                '/shopemp/product/categories',
+                function (data) {
+                    var htmlstr = "";
+                    for (var i = 0; i < data.length; i++) {
+                        htmlstr = htmlstr + "<option name='" + data[i].productCategoryId + "' value='" + data[i].productCategoryId + "'>" + data[i].productCategoryName + "</option>";
+                    }
+                    $("#categorymenu").html(htmlstr);   //将数据写入html中
+                }
+            );
+        })
+        $(function () {
+            //查询某个分类下的所有商品
+            $("#categorymenu").change(function () {
+                var cid = $(this).val();
+                // console.log(pid)
+                //查询所有
+                $.post(
+                    '/shopemp/product/productsofonecategory',
+                    {'productCategoryId': cid},
+                    function (data) {
+                        // console.log(data);
+                        var htmlstr = "";
+                        for (var i = 0; i < data.length; i++) {
+                            htmlstr = htmlstr + "<option name='" + data[i].productId + "' value='" + data[i].productId + "'>" + data[i].productName + "</option>";
+                        }
+                        $("#productmenu").html(htmlstr);   //将数据写入html中
+                    }
+                );
+            })
+        })
+    </script>
+</head>
+<style>
+    #button1 {
+        width: 100px;
+        height: 30px;
+        background: #17a2b8;
+        border-color: #17a2b8;
+        border-radius: 5px;
+        font-size: 16px;
+        color: whitesmoke;
+    }
+
+    #button2 {
+        width: 120px;
+        height: 30px;
+        background: #6c757d;
+        border-color: #6c757d;
+        border-radius: 5px;
+        font-size: 16px;
+        color: whitesmoke;
+    }
+</style>
+<header th:replace="shopemp/header::header-fragment"></header>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- 引入页面头header-fragment -->
+    <div th:replace="shopemp/header::header-nav"></div>
+    <!-- 引入工具栏sidebar-fragment -->
+    <div th:replace="shopemp/sidebar::sidebar-fragment(${path})"></div>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- Main content -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">新增商品属性信息</h3>
+                    </div>
+                    <div class="card-body">
+                        <!--                        <form id="productsForm" onsubmit="return false;">-->
+                        <!--                        <form id="productsForm" action="/shopemp/product/saveproperty" method="post">-->
+                        <form id="productsForm" action="">
+                            <div class="form-group" style="display:flex;">
+                                <label class="control-label">商品分类:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                <select class="form-control col-sm-3" id="categorymenu" name="productCategoryId">
+                                    <option selected="selected">请选择</option>
+                                </select>
+                                &nbsp;&nbsp;
+                                <label class="control-label">商品名称:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                <select class="form-control col-sm-3" id="productmenu" name="productId">
+                                    <option selected="selected">请选择</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="display:flex;">
+                                <label class="control-label">请输入商品属性:&nbsp;&nbsp;&nbsp;</label>
+                                <input type="text" class="form-control col-sm-6" name="productPropertyValue"
+                                       required="true"/>
+                            </div>
+                            <div class="form-group" style="display:flex;">
+                                <label class="control-label">请输入商品价格:&nbsp;&nbsp;&nbsp;</label>
+                                <input type="number" class="form-control col-sm-6" name="productDetailPrice"
+                                       required="true"/>
+                            </div>
+                            <div>
+                                <label class="control-label">请输入商品库存:&nbsp;&nbsp;</label>
+                                <input type="number" class="form-control col-sm-6" name="productDetailStock"
+                                       required="true"/>
+                            </div>
+                            <br>
+                            <div>
+                                <input id="button1" type="submit" value="保存商品"
+                                       onclick="javascript:this.form.action='/shopemp/product/saveproperty';"/>
+                                &nbsp;&nbsp;
+                                <input id="button2" type="submit" value="返回商品列表"
+                                       onclick="javascript:this.form.action='/shopemp/products';"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </div>
+    </div>
+    <!-- /.content-wrapper -->
+    <!-- 引入页脚footer-fragment -->
+    <div th:replace="shopemp/footer::footer-fragment"></div>
+</div>
+<!-- jQuery -->
+<script th:src="@{/shopemp/plugins/jquery/jquery.min.js}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script th:src="@{/shopemp/plugins/jQueryUI/jquery-ui.min.js}"></script>
+<!-- Bootstrap 4 -->
+<script th:src="@{/shopemp/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/shopemp/dist/js/adminlte.min.js}"></script>
+<!-- sweetalert -->
+<script th:src="@{/shopemp/plugins/sweetalert/sweetalert.min.js}"></script>
+<!-- ajaxupload -->
+<script th:src="@{/shopemp/plugins/ajaxupload/ajaxupload.js}"></script>
+<!-- wangEditor -->
+<script type="text/javascript" src="//unpkg.com/wangeditor/dist/wangEditor.min.js"></script>
+<!-- kindeditor -->
+<script th:src="@{/shopemp/dist/js/public.js}"></script>
+<script th:src="@{/shopemp/dist/js/newbee_mall_goods_edit.js}"></script>
+</body>
+</html>

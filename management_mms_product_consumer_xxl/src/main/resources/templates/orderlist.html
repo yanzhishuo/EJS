@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/shopemp/header::header-fragment">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>管理订单信息</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/shopping-mall-index.css}"/>
+    <script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+    <script type="text/javascript" th:src="@{/js/zhonglin.js}"></script>
+</head>
+
+<body>
+
+<!--    <div class="logo f-l">-->
+<!--        <h1><a href="#" title="中林网站"><img th:src="@{/images/ejs.jpg}"/></a></h1>-->
+<!--    </div>-->
+<!--    <div class="search f-r">-->
+<!--        <ul class="sp">-->
+<!--            <li class="current" ss-search="sp"><a href="JavaScript:;">商品</a></li>-->
+<!--            <li ss-search="dp"><a href="JavaScript:;">店铺</a></li>-->
+<!--            <div style="clear:both;"></div>-->
+<!--        </ul>-->
+<!--        <div class="srh">-->
+<!--            <div class="ipt f-l">-->
+<!--                <input type="text" placeholder="搜索商品..." ss-search-show="sp"/>-->
+<!--                <input type="text" placeholder="搜索店铺..." ss-search-show="dp" style="display:none;"/>-->
+<!--            </div>-->
+<!--            <button class="f-r">搜 索</button>-->
+<!--            <div style="clear:both;"></div>-->
+<!--        </div>-->
+<!--        <ul class="sp2">-->
+<!--            <li><a href="#">绿豆</a></li>-->
+<!--            <li><a href="#">大米</a></li>-->
+<!--            <li><a href="#">驱蚊</a></li>-->
+<!--            <li><a href="#">洗面奶</a></li>-->
+<!--            <li><a href="#">格力空调</a></li>-->
+<!--            <li><a href="#">洗发护发</a></li>-->
+<!--            <li><a href="#">葡萄 </a></li>-->
+<!--            <li><a href="#">脉动</a></li>-->
+<!--            <li><a href="#">海鲜水产</a></li>-->
+<!--            <div style="clear:both;"></div>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--    <div style="clear:both;"></div>-->
+<!--</div>-->
+
+<!--nav 开始-->
+        <div class="man-info">
+            <div class="man-if-con" >
+                <div class="man-tit" >
+                    <p class="p2" style='margin-left: 10px'>订单编号</p>
+                    <p class="p4">订单状态</p>
+                    <p class="p2">开始时间</p>
+                    <p class="p3">最近更新时间</p>
+                    <p class="p3">物流编号</p>
+                    <p class="p6">订单总额</p>
+                    <p class="p3"  style='margin-left: 140px'>操作</p>
+                </div>
+                <ul id="wl" class="man-ul1">
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div style="clear:both;"></div>
+    </div>
+<script type="text/javascript">
+
+    //同步加载数据
+    finish0();
+    function finish0 () {
+        $.ajax({
+            async: false,
+            url: '/order/list',
+            dataType: 'json',
+            success: function (data) {
+                renderOrderHtml(data);
+            }
+        });
+    }
+    function finish (orderId) {
+        $.ajax({
+            async: true,
+            url: '/order/dilvery',
+            data: {"orderId": orderId},
+            dataType: 'json',
+            success: function (data) {
+                renderOrderHtml(data);
+
+            }
+        });
+    }
+    function renderOrderHtml(data){
+        // // window.location.href = "/logistics/finished?logisticsId=" + data;
+        var orderHtml = "";//用来存储html内容
+        //alert(data.length);
+        if (data.length > 0) {
+            $.each(data, function (v, o) {
+                if (o.orderStatus != 0){
+                    orderHtml += "<li>";
+                    orderHtml += "<p class='p2' style='margin-left: 10px'>"+o.orderUuid+"</p>";
+                    if (o.orderStatus == 4){
+                        orderHtml += "<p class='p4'>配送中</p>";
+                    }
+                    if (o.orderStatus == 3){
+                        orderHtml += "<p class='p4'>未发货</p>";
+                    }
+                    if (o.orderStatus == 2){
+                        orderHtml += "<p class='p4'>已付款</p>";
+                    }
+                    if (o.orderStatus == 5){
+                        orderHtml += "<p class='p4'>待收货</p>";
+                    }
+                    if (o.orderStatus == 6){
+                        orderHtml += "<p class='p4'>待评价</p>";
+                    }
+                    if (o.orderStatus == 7){
+                        orderHtml += "<p class='p4'>交易完成</p>";
+                    }
+                    if (o.orderStatus == 1){
+                        orderHtml += "<p class='p4'>未付款</p>";
+                    }
+                    if (o.orderStatus == 8){
+                        orderHtml += "<p class='p4'>交易关闭</p>";
+                    }
+                    orderHtml += "<p class='p2'>"+o.orderCreateTime+"</p>";
+                    orderHtml += "<p class='p3'>"+o.orderUpdateTime+"</p>";
+
+                    //改成物流uuId
+                    if (o.orderStatus < 4){
+                        orderHtml += "<p class='p3'>暂无</p>";
+                    }
+                    if (o.orderStatus >= 4){
+                        orderHtml += "<p class='p3'>"+o.logisticsUuid+"</p>";
+                    }
+                    orderHtml += "<p class='p3'>"+o.orderPayment+"</p>";
+                    if (o.orderStatus ==1){
+                        orderHtml += "<p class='p4'>等待用户付款</p>";
+                    }
+                    if (o.orderStatus < 4 && o.orderStatus>1 ){
+                        orderHtml += "<button class='md-l-btn1' onclick='finish("+o.orderId+")'>发货</button>";
+                    }
+                    if (o.orderStatus >= 4){
+                        orderHtml += "<p class='p2'>已发货</p>";
+                    }
+                    orderHtml += "<div style='clear:both;'></div>";
+                    orderHtml += "</li>";
+                }
+            });
+            $("#wl").html(orderHtml);
+        }
+    }
+</script>
+</body>
+</html>

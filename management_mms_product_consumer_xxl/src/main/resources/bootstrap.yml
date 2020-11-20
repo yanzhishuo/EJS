@@ -1,0 +1,29 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: service-mms-product-consumer
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: SERVICE-CONFIG-SERVER
+      fail-fast: true
+      label: main
+      name: application
+      profile: main
+  profiles:
+    active: dev
+  main:
+    allow-bean-definition-overriding: true
+  thymeleaf:
+    cache: false
+
+
+
+
+
+
+
+

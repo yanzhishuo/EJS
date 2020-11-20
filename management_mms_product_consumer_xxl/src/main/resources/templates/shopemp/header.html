@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header-fragment">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>EJS | 后台管理系统</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link rel="shortcut icon" th:href="@{/shopemp/dist/img/favicon.ico}"/>
+    <link rel="stylesheet" th:href="@{/shopemp/dist/css/font-awesome.min.css}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" th:href="@{/shopemp/dist/css/ionicons.min.css}">
+    <link rel="stylesheet" th:href="@{/shopemp/dist/css/main.css}">
+    <link rel="stylesheet" th:href="@{/shopemp/plugins/bootstrap/css/bootstrap.css}"/>
+    <link rel="stylesheet" th:href="@{/shopemp/plugins/sweetalert/sweetalert.css}"/>
+    <link rel="stylesheet" th:href="@{/shopemp/plugins/jqgrid-5.3.0/ui.jqgrid-bootstrap4.css}"/>
+    <!-- Theme style -->
+    <link rel="stylesheet" th:href="@{/shopemp/dist/css/adminlte.min.css}">
+</head>
+<!-- Navbar -->
+<nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom" th:fragment="header-nav">
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+            <a class="nav-link" th:href="@{/}">
+                <i class="fa fa-paper-plane">&nbsp;&nbsp;商场首页</i>
+            </a>
+        </li>
+    </ul>
+</nav>
+<!-- /.navbar -->
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:replace="shopemp/header::header-fragment">
+</header>
+<style>
+    .ui-jqgrid tr.jqgrow td {
+        white-space: normal !important;
+        height: auto;
+        vertical-align: text-top;
+        padding-top: 2px;
+    }
+
+    a {
+        color: #1baeae;
+        text-decoration: none;
+        background-color: transparent;
+        -webkit-text-decoration-skip: objects;
+    }
+
+    a:hover {
+        color: white;
+        background-color: #1baeae;
+    }
+
+    tr td, th {
+        border: 1px solid grey;
+    }
+
+    /*取消table标签中的单元格空白*/
+    .mt {
+        border-collapse: collapse;
+    }
+</style>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- 引入页面头header-fragment -->
+    <div th:replace="shopemp/header::header-nav"></div>
+    <!-- 引入工具栏sidebar-fragment -->
+    <div th:replace="shopemp/sidebar::sidebar-fragment(${path})"></div>
+    <!-- Content Wrapper. Contains 图标content -->
+    <div class="content-wrapper">
+        <!--    <div>-->
+        <!-- Content Header (图标header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- Main content -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">商品管理</h3>
+                    </div> <!-- /.card-body -->
+                    <div class="card-body">
+                        <div class="grid-btn">
+                            <button class="btn btn-info" onclick="addProduct()"><i
+                                    class="fa fa-plus"></i>&nbsp;添加商品
+                            </button>
+                            <button class="btn btn-info" onclick="addProductProperty()"><i
+                                    class="fa fa-pencil-square-o"></i>&nbsp;添加商品属性
+                            </button>
+                            <!--                            <button class="btn btn-success" onclick="putUpGoods()"><i-->
+                            <!--                                    class="fa fa-arrow-up"></i>&nbsp;上架商品-->
+                            <!--                            </button>-->
+                            <!--                            <button class="btn btn-danger" onclick="putDownGoods()"><i-->
+                            <!--                                    class="fa fa-arrow-down"></i>&nbsp;下架商品-->
+                            <!--                            </button>-->
+                        </div>
+                        <!--                        <table id="jqGrid" class="table table-bordered">-->
+                        <!--                        </table>-->
+                        <!--                        <div id="jqGridPager"></div>-->
+                        <table cellpadding="0" cellspacing="0">
+                            <thead>
+                            <th width="80" style="text-align:center;">商品编号</th>
+                            <th width="100" style="text-align:center;">商品名称</th>
+                            <th width="150" style="text-align:center;">商品简介</th>
+                            <th width="100" style="text-align:center;">商品图片</th>
+                            <th width="100" style="text-align:center;">商品属性</th>
+                            <th width="100" style="text-align:center;">商品售价</th>
+                            <th width="80" style="text-align:center;">商品库存</th>
+                            <th width="100" style="text-align:center;">商品状态</th>
+                            <th width="120" style="text-align:center;">操作</th>
+                            </thead>
+                            <tbody>
+                            <tr th:each="productDetail : ${productDetailList}">
+                                <td width="80" align="center" th:text="${productDetail.productDetailId}">商品编号</td>
+                                <td width="100" align="center" th:text="${productDetail.product.productName}">商品名称</td>
+                                <td width="150" align="center" th:text="${productDetail.product.productDesc}">商品简介</td>
+                                <td width="100" align="center" th:text="${productDetail.product.productImage}">商品图片</td>
+                                <td width="100" align="center" th:text="${productDetail.productPropertyValue}">商品属性</td>
+                                <td width="100" align="center" th:text="${productDetail.productDetailPrice}">商品售价</td>
+                                <td width="80" align="center" th:text="${productDetail.productDetailStock}">商品存库</td>
+                                <td width="100" align="center" th:text="${productDetail.productDetailStatusValue}">
+                                    商品状态
+                                </td>
+                                <td width="120" align="center">
+                                    <a th:href="@{/shopemp/product/edit/}+${productDetail.productDetailId}">修改商品信息</a>
+                                    <br>
+                                    <!--                                    <a th:href="@{/shopemp/product/onsale/}+${productDetail.productDetailId}">上架商品</a>-->
+                                    <!--                                    <br>-->
+                                    <!--                                    <a th:href="@{/shopemp/product/offsale/}+${productDetail.productDetailId}">下架商品</a>-->
+                                </td>
+                            </tr>
+                            </tbody>
+                            <br>
+                        </table>
+                    </div><!-- /.card-body -->
+                </div>
+            </div><!-- /.container-fluid -->
+        </div>
+    </div>
+    <!-- /.content-wrapper -->
+    <!-- 引入页脚footer-fragment -->
+    <div th:replace="shopemp/footer::footer-fragment"></div>
+</div>
+<!-- jQuery -->
+<script th:src="@{/shopemp/plugins/jquery/jquery.min.js}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script th:src="@{/shopemp/plugins/jQueryUI/jquery-ui.min.js}"></script>
+<!-- Bootstrap 4 -->
+<script th:src="@{/shopemp/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/shopemp/dist/js/adminlte.min.js}"></script>
+<!-- jqgrid -->
+<script th:src="@{/shopemp/plugins/jqgrid-5.3.0/jquery.jqGrid.min.js}"></script>
+<script th:src="@{/shopemp/plugins/jqgrid-5.3.0/grid.locale-cn.js}"></script>
+<script th:src="@{/shopemp/plugins/jqgrid-5.3.0/grid.locale-cn.js}"></script>
+<!-- sweetalert -->
+<script th:src="@{/shopemp/plugins/sweetalert/sweetalert.min.js}"></script>
+<script th:src="@{/shopemp/dist/js/public.js}"></script>
+<script th:src="@{/shopemp/dist/js/newbee_mall_goods.js}"></script>
+</body>
+</html>

@@ -12,7 +12,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors(chain = true)
+//@Accessors(chain = true)
 public class UserInfo {
     /**
      * 用户详情id

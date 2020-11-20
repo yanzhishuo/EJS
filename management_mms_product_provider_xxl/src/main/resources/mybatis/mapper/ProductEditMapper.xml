@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cebbank.management_mms_product_provider.mapper.ProductEditMapper">
+    <resultMap id="productDetail" type="com.cebbank.management_mms_product_provider.common.pojo.ProductDetail">
+        <id column="product_detail_id" property="productDetailId"/>
+        <result column="product_id" property="productId"/>
+        <result column="product_property_value" property="productPropertyValue"/>
+        <result column="product_detail_price" property="productDetailPrice"/>
+        <result column="product_detail_stock" property="productDetailStock"/>
+        <result column="product_detail_create_time" property="productDetailCreateTime"/>
+        <result column="product_detail_status" property="productDetailStatus"/>
+        <association property="product" javaType="com.cebbank.management_mms_product_provider.common.pojo.Product">
+            <result column="product_no" property="productNo"/>
+            <result column="product_name" property="productName"/>
+            <result column="product_image" property="productImage"/>
+            <result column="product_category_id" property="productCategoryId"/>
+            <result column="product_desc" property="productDesc"/>
+            <result column="product_sold_amount" property="productSoldAmount"/>
+            <result column="product_status" property="productStatus"/>
+        </association>
+    </resultMap>
+    <sql id="Column_List">
+    product_detail_id,product_detail.product_id,product_property_value,product_detail_price,product_detail_stock,product_detail_create_time,product_detail_status,
+    product_no,product_name,product_image,product_category_id,product_desc,product_sold_amount,product_status
+    </sql>
+
+    <insert id="saveProductDetail">
+        insert into product_detail(`product_id`,`product_detail_price`,`product_detail_stock`,`product_property_value`,`product_detail_create_time`) values(#{productId},#{productDetailPrice},#{productDetailStock},#{productPropertyValue},#{productDetailCreateTime})
+    </insert>
+
+    <insert id="saveProduct" useGeneratedKeys="true" keyProperty="productId">
+        insert into product(`product_no`,`product_name`,`product_desc`,`product_category_id`,`product_create_time`) values(#{productNo},#{productName},#{productDesc},#{productCategoryId},#{productCreateTime})
+    </insert>
+
+    <select id="queryAllProducts" resultMap="productDetail">
+        SELECT
+        <include refid="Column_List"/>
+        from product inner join product_detail
+        on product.product_id = product_detail.product_id
+        order by product_detail_id desc
+        <if test="start!=null and limit!=null">
+            limit #{start},#{limit}
+        </if>
+    </select>
+
+    <select id="getProductsAmount" resultType="java.lang.Integer">
+        select count(*)
+        from product inner join product_detail
+        on product.product_id = product_detail.product_id
+    </select>
+
+    <select id="queryProductByproductDetailId" resultMap="productDetail">
+        SELECT
+        <include refid="Column_List"/>
+        from product inner join product_detail
+        on product.product_id = product_detail.product_id where product_detail_id = #{productDetailId}
+    </select>
+
+    <update id="productOnSale">
+        update product_detail set product_detail_status = 2 where product_detail_id = #{productDetailId}
+    </update>
+
+    <update id="productOffSale">
+        update product_detail set product_detail_status = 3 where product_detail_id = #{productDetailId}
+    </update>
+
+    <update id="updateProductDetail">
+        update product_detail set product_detail_status = 1, product_detail_price = #{productDetailPrice}, product_detail_stock = #{productDetailStock} where product_detail_id = #{productDetailId}
+    </update>
+
+    <update id="updateProduct">
+        update product set product_desc = #{productDesc} where product_no = #{productNo}
+    </update>
+
+    <update id="updateProductStatusOnSale">
+        update product set product_status = 1 where product_id =
+        (select res.product_id from(select product.product_id from product inner join product_detail on product.product_id = product_detail.product_id where product_detail_id = #{productDetailId}) as res)
+    </update>
+
+    <update id="updateProductStatusOffSale">
+        update product set product_status = 0 where product_id =
+        (select res.product_id from(select product.product_id from product inner join product_detail on product.product_id = product_detail.product_id where product_detail_id = #{productDetailId}) as res)
+    </update>
+
+
+    <select id="queryproductCategoryNameByproductDetailId" resultType="string">
+        select product_category_name from product_category inner join product inner join product_detail
+        on product_category.product_category_id = product.product_category_id
+        and product.product_id = product_detail.product_id
+        where product_detail.product_detail_id = #{productDetailId}
+    </select>
+
+    <select id="queryProductsOfCategory" resultType="com.cebbank.management_mms_product_provider.common.pojo.Product">
+        select product_id,product_name,product_category_id,product_desc,product_status from product
+        where product_category_id = #{productCategoryId}
+    </select>
+
+    <select id="queryOnSaleProduct" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM product_detail WHERE product_id = (SELECT product_id FROM product_detail WHERE product_detail_id =  #{productDetailId})
+        and product_detail_status = 2
+    </select>
+
+</mapper>

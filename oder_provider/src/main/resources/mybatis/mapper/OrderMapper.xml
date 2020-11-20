@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cebbank.order.mapper.OrderMapper">
+<!--    <resultMap id="orderDetail" type="com.cebbank.order.common.pojo.Order">-->
+<!--        <id column="order_id" property="orderId"/>-->
+<!--        <result column="user_login_id" property="userLoginId"/>-->
+<!--        <result column="logistics_id" property="logisticsId"/>-->
+<!--        <result column="order_payment" property="orderPayment"/>-->
+<!--        <result column="order_status" property="orderStatus"/>-->
+<!--        <result column="order_uuid" property="orderUuid"/>-->
+<!--        <association property="orderProduct" javaType="com.cebbank.order.common.pojo.OrderProduct">-->
+<!--            <result column="order_product_id" property="orderProductId"/>-->
+<!--            <result column="product_detail_id" property="productDetailId"/>-->
+<!--            <result column="order_product_amount" property="orderProductAmount"/>-->
+<!--            <result column="order_product_status" property="orderProductStatus"/>-->
+<!--        </association>-->
+<!--    </resultMap>-->
+    <sql id="Column_List">
+        o.order_id,o.user_login_id,o.logistics_id,o.order_payment,o.order_status,o.order_uuid,o.order_update_time,
+        op.order_product_id,op.product_detail_id,op.order_product_amount,op.order_product_status,
+        pr.product_name,pr.product_image,pd.product_property_value,pd.product_detail_price,pd.product_property_value
+    </sql>
+
+<!--    <select id="selectOrdersByUserLoginId" resultMap="orderDetail">-->
+<!--        SELECT-->
+<!--        <include refid="Column_List"/>-->
+<!--        from `order` o inner join order_product op-->
+<!--        on o.order_id = op.order_id-->
+<!--    </select>-->
+
+    <select id="selectOrdersByUserLoginId" resultType="java.util.HashMap">
+        SELECT
+        <include refid="Column_List"/>
+        from `order` o inner join order_product op inner join product pr inner join product_detail pd
+        on o.order_id = op.order_id and op.product_detail_id = pd.product_detail_id
+        and pd.product_id = pr.product_id
+        <where>
+            product_status='1' and product_detail_status='2' and o.order_status != 0
+            <if test="userLoginId != null">
+                and user_login_id = #{userLoginId}
+            </if>
+        </where>
+    </select>
+
+
+    <update id="updateOrderstatusByOrderId">
+        update `order` set order_status = #{orderStatus} where order_id = #{orderId}
+    </update>
+
+    <update id="updateOrderstatusByOrderUuid">
+        update `order` set order_status = #{orderStatus} where order_uuid = #{orderUuid}
+    </update>
+
+
+
+</mapper>
