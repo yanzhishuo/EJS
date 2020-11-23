@@ -32,9 +32,14 @@ public class IndexController {
      *
      * @return
      */
-    @RequestMapping("/")
+    @RequestMapping("/facelogin")
     public String jump() {
         return "face";
+    }
+
+    @RequestMapping("/facereg")
+    public String jump1() {
+        return "facer";
     }
 
 }
