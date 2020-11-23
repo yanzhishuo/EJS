@@ -14,6 +14,16 @@ spring:
     active: dev
 server:
   port: 8783
+
+baidu:
+  # 人脸识别
+  humaface:
+    app-name: login-face
+    # 应用名称
+    app-id: 23012020  # appID
+    app-key: ftA1aAiNou3t9QKZFdnqvbTX # API Key
+    secret-key: fmSwWSRLN1T5UiPlCStoL5T4ctn9qtGN # Secret Key
+
 #ribbon:
 #  ReadTimeout: 60000
 #  ConnectTimeout: 60000

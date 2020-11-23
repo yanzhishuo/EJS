@@ -27,4 +27,14 @@ public class IndexController {
 //    @RequestMapping("/logisticsList")
 //    public  String logistic(){return "logisticsList.html";}
 
+    /**
+     * 跳转face页面
+     *
+     * @return
+     */
+    @RequestMapping("/")
+    public String jump() {
+        return "face";
+    }
+
 }

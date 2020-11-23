@@ -24,6 +24,10 @@ public class LogisticsController {
 //        model.addAttribute("logisticsList",logisticsList);
         return "logisticsList";
     }
+    @RequestMapping("/s")
+    public String logisticsLists(){
+        return "logisticsList";
+    }
 
     @ResponseBody
     @RequestMapping("/list")
