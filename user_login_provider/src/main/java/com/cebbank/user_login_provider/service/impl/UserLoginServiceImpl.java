@@ -14,8 +14,8 @@ public class UserLoginServiceImpl implements UserLoginService {
 
     @Autowired(required = false)
     private UserLoginMapper userLoginMapper;
-    @Autowired
-    RedisDao redisDao;
+//    @Autowired
+//    RedisDao redisDao;
 
     @Override
     public UserLogin findUserLoginByUserLoginId(Integer userLoginId)
@@ -29,8 +29,8 @@ public class UserLoginServiceImpl implements UserLoginService {
         System.out.println("查数据库");
         UserLogin userLogin=userLoginMapper.selectUserLoginByPhoneAndPassword(phone, MD5Util.md5(password));
         String key = "userloginfo:" + phone;
-        redisDao.setObjlogin(key,userLogin);
-        System.out.println("hhhh"+redisDao.getObj(key).toString());
+//        redisDao.setObjlogin(key,userLogin);
+//        System.out.println("hhhh"+redisDao.getObj(key).toString());
 
 //        redisDao.setObjinfo(key,userLogin);
 //        redisDao.setObjinfo();

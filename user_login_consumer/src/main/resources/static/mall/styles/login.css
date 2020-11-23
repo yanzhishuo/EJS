@@ -54,6 +54,7 @@ body {
     line-height: 40px;
     font-weight: bold;
     font-size: 20px;
+    color: red;
 }
 
 .form .login .login_center .login_top .right {

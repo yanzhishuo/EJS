@@ -12,21 +12,7 @@ spring:
       label: main
       name: application
       profile: main
-  redis:
-    host: 192.168.34.130
-    port: 6379
-    client-name: root
 
-  #  缓存类型
-  cache:
-    type: redis
-
-#  datasource:
-#    username: root
-#    password: 123456
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/ejs?characterEncoding=utf-8&serverTimezone=UTC
-#    type: com.alibaba.druid.pool.DruidDataSource
   mvc:
     format:
       date: yyyy-MM-dd

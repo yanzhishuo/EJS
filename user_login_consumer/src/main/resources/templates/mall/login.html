@@ -24,8 +24,8 @@
                 <div class="clear"></div>
                 <div class="under-line center"></div>
             </div>
-            <form id="loginForm" th:action="@{/EJS/userloginconsumer/userlogin/loginuser}" method="post">
-<!--            <form id="loginForm" onsubmit="return false;" action="##">-->
+            <form id="loginForm"  method="post">
+                <input type="hidden" name="target" th:value="${target}">
                 <div class="login_main center">
                     <div class="login-info">手机号:&nbsp;<input class="login-info-input" type="text" name="userLoginPhone"
                                                              id="userLoginPhone"
@@ -36,73 +36,42 @@
                                                                                     type="password"
                                                                                     name="userLoginPassword"
                                                                                     placeholder="请输入你的密码"/></div>
-<!--                    <div class="login-info">-->
-<!--                        验证码:&nbsp;-->
-<!--                        <input class="login-info-input verify-code" type="text" name="verifyCode"-->
-<!--                               placeholder="请输入验证码" id="verifyCode"/>-->
-<!--                        <img alt="单击图片刷新！" style="top: 14px;position: relative;" th:src="@{/common/mall/kaptcha}"-->
-<!--                             onclick="this.src='/common/mall/kaptcha?d='+new Date()*1">-->
-<!--                    </div>-->
                 </div>
+                <a  style="color: red" th:href="@{/EJS/userloginconsumer/userlogin/updatepassword}">忘记密码</a>
                 <div class="login_submit">
-                    <input class="submit" type="submit" value="立即登录">
-<!--                    <input class="submit" type="submit" onclick="login()" value="立即登录">-->
+                    <input class="submit" type="button" onclick="userLogin()" value="立即登录">
                 </div>
             </form>
         </div>
     </div>
 </div>
 </body>
-<!-- jQuery -->
-<script th:src="@{/admin/plugins/jquery/jquery.min.js}"></script>
-<script th:src="@{/admin/dist/js/public.js}"></script>
-<script th:src="@{/admin/plugins/sweetalert/sweetalert.min.js}"></script>
+<script th:src="@{/EJS/userloginconsumer/admin/plugins/jquery/jquery.min.js}"></script>
+<script th:src="@{/EJS/userloginconsumer/admin/dist/js/public.js}"></script>
+<script th:src="@{/EJS/userloginconsumer/admin/plugins/sweetalert/sweetalert.min.js}"></script>
 <script type="text/javascript">
-    function login() {
-        var loginName = $("#userLoginPhone").val();
-        if (!validPhoneNumber(loginName)) {
-            swal('请输入正确的登录名(即手机号)', {
-                icon: "error",
-            });
-            return false;
-        }
-        var password = $("#userLoginPassword").val();
-        if (!validPassword(password)) {
-            swal('请输入正确的密码格式(6-20位字符和数字组合)', {
-                icon: "error",
-            });
-            return false;
-        }
-        // var verifyCode = $("#verifyCode").val();
-        // if (!validLength(verifyCode, 7)) {
-        //     swal('请输入正确的验证码', {
-        //         icon: "error",
-        //     });
-        //     return false;
-        // }
-        // //验证
-        var params = $("#loginForm").serialize();
-        alert(params);
-        var url = '/loginuser';
+    function userLogin() {
         $.ajax({
-            type: 'POST',//方法类型
-            url: url,
-            data: params,
-            // success: function (result) {
-            //     if (result.resultCode == 200) {
-            //         window.location.href = '/index';
-            //     } else {
-            //         swal(result.message, {
-            //             icon: "error",
-            //         });
-            //     }
-            //     ;
-            // },
-            // error: function () {
-            //     swal("操作失败", {
-            //         icon: "error",
-            //     });
-            // }
+            type: 'post',
+            url: 'http://localhost:9000/EJS/userloginconsumer/userlogin/loginuser',
+            data: $("#loginForm").serialize(),
+            dataType: "json",
+            success: function (data) {   //成功后回调
+                if(data.pass == 0){
+                    // window.localStorage.setItem("token",data.token);
+                    alert(data.message);
+                    location.href=data.message+"?token="+ data.token;
+                }
+                if(data.pass == 1){
+                    location.href="http://localhost:9000/EJS/userloginconsumer/userlogin/registeruser";
+                }
+                if(data.pass == 2){
+                    location.href="http://localhost:9000/EJS/userloginconsumer/userlogin/updatepassword";
+                }
+            },
+            error: function (error) {    //失败后回调
+                alert("connect error.");
+            }
         });
     }
 </script>

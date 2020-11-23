@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cebbank.logistics_provider.mapper.LogisticsMapper">
+    <select id="selectLogisticsByLogisticsId" resultType="com.cebbank.logistics_provider.pojo.Logistics">
+		select logistics_uuid,logistics_create_time,logistics_update_time,logistics_status from logistics where logistics_id=#{logisticsId};
+    </select>
+    <update id="updatelogisticsStatusByLogisticsId" >
+		update logistics set logistics_status=3 where logistics_id=#{logisticsId};
+   	</update>
+    <select id="selectAllLogistics" resultType="com.cebbank.logistics_provider.pojo.Logistics">
+		select logistics_id,logistics_uuid,logistics_create_time,logistics_update_time,logistics_status from logistics;
+    </select>
+    <update id="updatelogisticsUpdateTimeByLogisticsId">
+        update logistics set logistics_update_time=now() where logistics_id=#{logisticsId};
+    </update>
+</mapper>
