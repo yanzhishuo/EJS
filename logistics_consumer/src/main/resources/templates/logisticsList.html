@@ -11,61 +11,26 @@
 </head>
 
 <body>
-<!--top 开始-->
-<!--<div class="top">-->
-<!--    <div class="top-con w1200">-->
-<!--        <p class="t-con-l f-l">您好，欢迎来到效</p>-->
-<!--        <ul class="t-con-r f-r">-->
-<!--            <li><a href="#">我 (个人中心)</a></li>-->
-<!--            <li><a href="#">我的购物车</a></li>-->
-<!--            <li><a href="#">我的订单</a></li>-->
-<!--            <li class="erweima">-->
-<!--                <a href="#">扫描二维码</a>-->
-<!--                <div class="ewm-tu">-->
-<!--                    <a href="#"><img th:src="@{/images/erweima-tu.jpg}"/></a>-->
-<!--                </div>-->
-<!--            </li>-->
-<!--            <div style="clear:both;"></div>-->
-<!--        </ul>-->
-<!--        <div style="clear:both;"></div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--logo search 开始-->
+EJS物流
+<div class="top">
+    <div class="top-con w1200">
+        <p class="t-con-l f-l">厚德载物,尽心服务</p>
+        <ul class="t-con-r f-r">
+            <li><a href="#">我 (员工中心)</a></li>
+            <li><a href="#">工作记录</a></li>
+            <li><a href="#">我的订单</a></li>
+            <li class="erweima">
+                <a href="#">分享二维码</a>
+                <div class="ewm-tu">
+                    <a href="#"><img th:src="@{/images/erweima-tu.jpg}"/></a>
+                </div>
+            </li>
+            <div style="clear:both;"></div>
+        </ul>
+        <div style="clear:both;"></div>
+    </div>
+</div>
 
-<!--    <div class="logo f-l">-->
-<!--        <h1><a href="#" title="中林网站"><img th:src="@{/images/ejs.jpg}"/></a></h1>-->
-<!--    </div>-->
-<!--    <div class="search f-r">-->
-<!--        <ul class="sp">-->
-<!--            <li class="current" ss-search="sp"><a href="JavaScript:;">商品</a></li>-->
-<!--            <li ss-search="dp"><a href="JavaScript:;">店铺</a></li>-->
-<!--            <div style="clear:both;"></div>-->
-<!--        </ul>-->
-<!--        <div class="srh">-->
-<!--            <div class="ipt f-l">-->
-<!--                <input type="text" placeholder="搜索商品..." ss-search-show="sp"/>-->
-<!--                <input type="text" placeholder="搜索店铺..." ss-search-show="dp" style="display:none;"/>-->
-<!--            </div>-->
-<!--            <button class="f-r">搜 索</button>-->
-<!--            <div style="clear:both;"></div>-->
-<!--        </div>-->
-<!--        <ul class="sp2">-->
-<!--            <li><a href="#">绿豆</a></li>-->
-<!--            <li><a href="#">大米</a></li>-->
-<!--            <li><a href="#">驱蚊</a></li>-->
-<!--            <li><a href="#">洗面奶</a></li>-->
-<!--            <li><a href="#">格力空调</a></li>-->
-<!--            <li><a href="#">洗发护发</a></li>-->
-<!--            <li><a href="#">葡萄 </a></li>-->
-<!--            <li><a href="#">脉动</a></li>-->
-<!--            <li><a href="#">海鲜水产</a></li>-->
-<!--            <div style="clear:both;"></div>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--    <div style="clear:both;"></div>-->
-<!--</div>-->
-
-<!--nav 开始-->
         <div class="man-info">
             <div class="man-if-con" >
                 <div class="man-tit" >
@@ -76,20 +41,64 @@
                     <p class="p5">操作</p>
                 </div >
                 <ul id="wl" class="man-ul1">
-<!--                    <li>-->
-<!--                        <p class="p1" th:text="${logistics.logistics_uuid}"></p>-->
-<!--                        <p class="p2" th:text="${logistics.logistics_status}"></p>-->
-<!--                        <p class="p3" th:text="${logistics.logistics_create_time}"></p>-->
-<!--                        <p class="p4" th:text="${logistics.logistics_update_time}"></p>-->
-<!--                        <button  th:onclick="'finish('+${logistics.logistics_id}+')'">确认送达</button>-->
-<!--                        <div style="clear:both;"></div>-->
-<!--                    </li>-->
                 </ul>
             </div>
         </div>
     </div>
     <div style="clear:both;"></div>
     </div>
+<div class="logo f-l">
+    <h1 align="center"><a href="#" title="中林网站"><img th:src="@{/images/ejs.jpg}"/></a></h1>
+</div>
+<div class="ft-service">
+    <div class="w1200">
+        <div class="sv-con-l2 f-l">
+            <dl>
+                <dt><a href="#">新手上路</a></dt>
+                <dd>
+                    <a href="#">物流配送流程</a>
+                    <a href="#">收款教程</a>
+                </dd>
+            </dl>
+            <dl>
+                <dt><a href="#">配送方式</a></dt>
+                <dd>
+                    <a href="#">货到付款区域</a>
+                    <a href="#">配送费标准</a>
+                </dd>
+            </dl>
+            <dl>
+                <dt><a href="#">配送指南</a></dt>
+                <dd>
+                    <a href="#">常见问题</a>
+                    <a href="#">配送流程</a>
+                </dd>
+            </dl>
+            <dl>
+                <dt><a href="#">售后服务</a></dt>
+                <dd>
+                    <a href="#">配送服务保障</a>
+                    <a href="#">退款说明</a>
+                    <a href="#">快递运送总则</a>
+                </dd>
+            </dl>
+            <dl>
+                <dt><a href="#">关于EJS物流</a></dt>
+                <dd>
+                    <a href="#">投诉与建议</a>
+                </dd>
+            </dl>
+            <div style="clear:both;"></div>
+        </div>
+        <div class="sv-con-r2 f-r">
+            <p class="sv-r-tle">187-8660-5539</p>
+            <p>周一至周五9:00-17:30</p>
+            <p>（仅收市话费）</p>
+            <a href="#" class="zxkf">负责人电话</a>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+</div>
 <script type="text/javascript">
 
     //同步加载数据
@@ -125,20 +134,20 @@
             $.each(data, function (v, o) {
                 if (o.logisticsStatus != 0){
                     logisticsHtml += "<li>";
-                    logisticsHtml += "<p class='p1'>"+o.logisticsUuid+"</p>";
+                    logisticsHtml += "<p  class='p1'>"+o.logisticsUuid+"</p>";
                     if (o.logisticsStatus == 3){
-                        logisticsHtml += "<p class='p2'>配送完成</p>";
+                        logisticsHtml += "<p  class='p2'>配送完成</p>";
                     }
                     if (o.logisticsStatus == 2){
-                        logisticsHtml += "<p class='p2'>配送中</p>";
+                        logisticsHtml += "<p  class='p2'>配送中</p>";
                     }
-                    logisticsHtml += "<p class='p2'>"+o.logisticsCreateTime+"</p>";
-                    logisticsHtml += "<p class='p2'>"+o.logisticsUpdateTime+"</p>";
+                    logisticsHtml += "<p  class='p2'>"+o.logisticsCreateTime+"</p>";
+                    logisticsHtml += "<p  class='p2'>"+o.logisticsUpdateTime+"</p>";
                     if (o.logisticsStatus == 2){
                         logisticsHtml += "<button class='md-l-btn1' onclick='finish("+o.logisticsId+")'>确认送达</button>";
                     }
                     if (o.logisticsStatus == 3){
-                        logisticsHtml += "<p class='p2'>已送达</p>";
+                        logisticsHtml += "<p  class='p2'>已送达</p>";
                     }
                     logisticsHtml += "<div style='clear:both;'></div>";
                     logisticsHtml += "</li>";
