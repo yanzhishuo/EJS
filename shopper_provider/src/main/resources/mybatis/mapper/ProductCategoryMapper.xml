@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cebbank.shopper_provider.mapper.ProductCategoryMapper">
+    <!--根据分类名查询分类id-->
+    <select id="selectIdByCategoryName" resultType="Integer">
+		select product_category_id from product_category
+		where product_category_name=#{category}
+	</select>
+    <!--根据分类名查询分类id-->
+    <select id="selectProductCategorys" resultType="ProductCategory">
+        select product_category_id, product_category_name from product_category
+        <where>
+            <if test="category != null and category != ''">
+                product_category_name=#{category}
+            </if>
+        </where>
+    </select>
+</mapper>

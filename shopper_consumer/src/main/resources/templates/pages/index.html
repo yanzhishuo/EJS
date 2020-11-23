@@ -1,28 +1,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>我的订单</title>
-<link rel="stylesheet" type="text/css" href="css/style.css" />
-<link rel="stylesheet" type="text/css" href="css/shopping-mall-index.css" />
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/zhonglin.js"></script>
+<title>在线商城首页</title>
+<link rel="stylesheet" type="text/css" th:href="@{/EJS/shopperConsumer/css/style.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/EJS/shopperConsumer/css/shopping-mall-index.css}" />
+<script type="text/javascript" th:src="@{/EJS/shopperConsumer/js/jquery.js}"></script>
+<script type="text/javascript" th:src="@{/EJS/shopperConsumer/js/zhonglin.js}"></script>
 </head>
 
-<body style="position:relative;">
-
+<body>
 	<!--top 开始-->
     <div class="top">
     	<div class="top-con w1200">
-        	<p class="t-con-l f-l">您好，欢迎来到宅客微购</p>
+        	<p class="t-con-l f-l">您好，欢迎来到小鹰微购</p>
             <ul class="t-con-r f-r">
             	<li><a href="#">我 (个人中心)</a></li>
-            	<li><a href="#">我的购物车</a></li>
+            	<li><a href="/EJS/shopperConsumer/cartPage">我的购物车</a></li>
             	<li><a href="#">我的订单</a></li>
             	<li class="erweima">
                 	<a href="#">扫描二维码</a>
                     <div class="ewm-tu">
-                    	<a href="#"><img src="images/erweima-tu.jpg" /></a>
+                    	<a href="#"><img th:src="@{/EJS/shopperConsumer/images/erweima-tu.jpg}" /></a>
                     </div>
                 </li>
                 <div style="clear:both;"></div>
@@ -34,7 +33,14 @@
     <!--logo search 开始-->
     <div class="hd-info1 w1200">
     	<div class="logo f-l">
-        	<h1><a href="#" title="中林网站"><img src="images/logo.jpg" /></a></h1>
+        	<h1><a href="#" title="中林网站"><img width="100px" height="126px" src="images/homePage/logo.jpg" /></a></h1>
+        </div>
+        <div class="dianji f-r">
+        	<div class="btn1">
+            	<button class="btn1-l">注册</button>
+                <button class="btn1-r">登录</button>
+                <div style="clear:both;"></div>
+            </div>
         </div>
         <div class="search f-r">
         	<ul class="sp">
@@ -63,16 +69,119 @@
                 <div style="clear:both;"></div>
             </ul>
         </div>
+        
         <div style="clear:both;"></div>
     </div>
     
+    <!--切换城市-->
+    <div class="switch-city w1200">
+    	<a href="#" class="dianji-qh">切换城市</a>
+        <span class="dqm">北京市</span>
+        <div class="select-city">
+        	<div class="sl-city-top">
+            	<p class="f-l">切换城市</p>
+                <a class="close-select-city f-r" href="#">
+                	<img src="images/close-select-city.gif" />
+                </a>
+            </div>
+            <div class="sl-city-con">
+            	<p>西北</p>
+                <dl>
+                	<dt>北京市</dt>
+                    <dd>
+                    	<a href="#">海淀区</a>
+                        <a href="#">东城区</a>
+                        <a href="#">西城区</a>
+                        <a href="#">石景山区</a>
+                        <a href="#">朝阳区</a>
+                        <a href="#">丰台区</a>
+                        <a href="#">房山区</a>
+                        <a href="#">通州区</a>
+                        <a href="#">密云区</a>
+
+                    </dd>
+                    <div style="clear:both;"></div>
+                </dl>
+                <dl>
+                	<dt>新疆</dt>
+                    <dd>
+                    	<a href="#">齐乌鲁木</a>
+                        <a href="#">昌吉</a>
+                        <a href="#">巴音</a>
+                        <a href="#">郭楞</a>
+                        <a href="#">伊犁</a>
+                        <a href="#">阿克苏</a>
+                        <a href="#">喀什</a>
+                        <a href="#">哈密</a>
+                        <a href="#">克拉玛依</a>
+                        <a href="#">博尔塔拉</a>
+                        <a href="#">吐鲁番</a>
+                        <a href="#">和田</a>
+                        <a href="#">石河子</a>
+                        <a href="#">克孜勒苏</a>
+                        <a href="#">阿拉尔</a>
+                        <a href="#">五家渠</a>
+                        <a href="#">图木舒克</a>
+                        <a href="#">库尔勒</a>
+                    </dd>
+                    <div style="clear:both;"></div>
+                </dl>
+                <dl>
+                	<dt>甘肃</dt>
+                    <dd>
+                    	<a href="#">兰州</a>
+                        <a href="#">天水</a>
+                        <a href="#">巴音</a>
+                        <a href="#">白银</a>
+                        <a href="#">庆阳</a>
+                        <a href="#">平凉</a>
+                        <a href="#">酒泉</a>
+                        <a href="#">张掖</a>
+                        <a href="#">武威</a>
+                        <a href="#">定西</a>
+                        <a href="#">金昌</a>
+                        <a href="#">陇南</a>
+                        <a href="#">临夏</a>
+                        <a href="#">嘉峪关</a>
+                        <a href="#">甘南</a>
+                    </dd>
+                    <div style="clear:both;"></div>
+                </dl>
+                <dl>
+                	<dt>宁夏</dt>
+                    <dd>
+                    	<a href="#">银川</a>
+                        <a href="#">吴忠</a>
+                        <a href="#">石嘴山</a>
+                        <a href="#">中卫</a>
+                        <a href="#">固原</a>
+                    </dd>
+                    <div style="clear:both;"></div>
+                </dl>
+                <dl>
+                	<dt>青海</dt>
+                    <dd>
+                    	<a href="#">西宁</a>
+                        <a href="#">海西</a>
+                        <a href="#">海北</a>
+                        <a href="#">果洛</a>
+                        <a href="#">海东</a>
+                        <a href="#">黄南</a>
+                        <a href="#">玉树</a>
+                        <a href="#">海南</a>
+                    </dd>
+                    <div style="clear:both;"></div>
+                </dl>
+            </div>
+        </div>
+    </div>
+    
     <!--nav 开始-->
-    <div style="border-bottom:2px solid #F09E0B;">
-    	<div class="nav w1200">
+    <div class="nav w1200">
     	<a href="JavaScript:;" class="sp-kj" kj="">
         	商品分类快捷
         </a>
-        <div class="kj-show2 none" kj-sh="">
+        <div class="kj-show2">
             <div class="kj-info1" mg="shiping">
             	<dl class="kj-dl1">
                		<dt><a href="#">食品/饮料/酒水</a></dt>
@@ -297,7 +406,6 @@
                         <div style="clear:both;"></div>
                     </dl>
                     <dl>
-
                     	<dt>厨具餐具</dt>
                         <dd>
                         	<a href="#">坚果迷线</a>
@@ -497,7 +605,6 @@
                     </dl>
                     <dl>
                     	<dt>家居/家纺</dt>
-
                         <dd>
                         	<a href="#">坚果迷线</a>
                         	<a href="#">膨化食品</a>
@@ -533,233 +640,177 @@
             </div>
         </div>
         <ul>
-        	<li><a href="#">在线商城</a></li>
-        	<li><a href="#">餐饮娱乐</a></li>
-        	<li><a href="#">家政服务</a></li>
-        	<li><a href="#">美容美发</a></li>
-        	<li><a href="#">教育培训</a></li>
-        	<li><a href="#">汽车房产</a></li>
-        	<li><a href="#">家居建材</a></li>
-        	<li><a href="#">二手市场</a></li>
+        	<li><a href="/EJS/shopperConsumer/category?categoryName=手链" id="bracelet">手链</a></li>
+        	<li><a href="/EJS/shopperConsumer/category?categoryName=项链" id="necklace">项链</a></li>
+        	<li><a href="/EJS/shopperConsumer/category?categoryName=耳环" id="earrings">耳环</a></li>
+        	<li><a href="/EJS/shopperConsumer/category?categoryName=戒指" id="ring">戒指</a></li>
+        	<li><a href="/EJS/shopperConsumer/category?categoryName=手表" id="watch">手表</a></li>
             <div style="clear:both;"></div>
         </ul>
         <div style="clear:both;"></div>
     </div>
+    
+    <!--banner 开始-->
+    <div class="banner-box">
+    	<div class="banner w1200">
+        	<ul>
+            	<li><a href="JavaScript:;"><img src="images/homePage/05.png" /></a></li>
+                <li><a href="JavaScript:;"><img src="images/homePage/04.png" /></a></li>
+                <li><a href="JavaScript:;"><img src="images/homePage/03.png" /></a></li>
+                <li><a href="JavaScript:;"><img src="images/homePage/02.png" /></a></li>
+                <li><a href="JavaScript:;"><img src="images/homePage/01.png" /></a></li>
+                <li><a href="JavaScript:;"><img src="images/homePage/05.png" /></a></li>
+                <div style="clear:both;"></div>
+            </ul>
+            <a href="JavaScript:;" class="bnr bnr-left"><</a>
+            <a href="JavaScript:;" class="bnr bnr-right">></a>
+        </div>
     </div>
     
-    <!--内容开始-->
-    <div class="personal w1200">
-    	<div class="personal-left f-l">
-        	<div class="personal-l-tit">
-            	<h3>个人中心</h3>
+    <!--热门推荐-->
+    <div class="hot-recommend w1200">
+    	<h3>热门推荐</h3>
+        <ul class="">
+        	<li class="ys1">
+            	<a href="#"><img src="images/hot-tu1.jpg" /></a>
+                <div class="ys1-opt"></div>
+                <div class="ys1-ft">
+                	<p>最唯美<br /><span>时尚酒店</span></p>
+                    <a href="#">点击有实惠</a>
+                </div>
+            </li>
+            <li class="ys2">
+            	<p>汽车保养</p>
+                <a href="#" class="ys2-a1" style="margin-bottom:25px;">上门汽车保养1一元钱</a>
+            	<a href="#"><img src="images/hot-tu2.jpg" /></a>
+            </li>
+            <li class="ys2">
+            	<p>汽车保养</p>
+                <a href="#" class="ys2-a1">上门汽车保养1一元钱</a>
+                <a href="#"><img src="images/hot-tu3.jpg" /></a>
+            </li>
+            <li class="ys2" style=" width:298px;">
+            	<p>汽车保养</p>
+                <a href="#" class="ys2-a1">上门汽车保养1一元钱</a>
+            	<a href="#"><img src="images/hot-tu4.jpg" /></a>
+            </li>
+            <li class="ys1">
+            	<a href="#"><img src="images/hot-tu5.jpg" /></a>
+                <div class="ys1-opt"></div>
+                <div class="ys1-ft">
+                	<p>最实惠KTV<br /><span>最佳组合</span></p>
+                    <a href="#">点击有实惠</a>
+                </div>
+            </li>
+            <li class="ys1">
+            	<a href="#"><img src="images/hot-tu6.jpg" /></a>
+                <div class="ys1-opt"></div>
+                <div class="ys1-ft">
+                	<p>最贴心家政<br /><span>包您满意</span></p>
+                    <a href="#">点击有实惠</a>
+                </div>
+            </li>
+            <li class="ys2">
+            	<p>汽车保养</p>
+                <a href="#" class="ys2-a1" style="margin-bottom:12px;">上门汽车保养1一元钱</a>
+            	<a href="#"><img src="images/hot-tu7.jpg" /></a>
+            </li>
+            <li class="ys2" style="width:298px;">
+            	<p>汽车保养</p>
+                <a href="#" class="ys2-a1" style="margin-bottom:15px;">上门汽车保养1一元钱</a>
+            	<a href="#"><img src="images/hot-tu8.jpg" /></a>
+            </li>
+            <div style="clear:both;"></div>
+        </ul>
+    </div>
+    
+    <!--商品内容页面-->
+    <div class="shopping-content w1200">
+    	<div class="sp-con-info">
+        	<h3 class="sp-info-tit"><span>1F</span>项链</h3>
+        	<div class="sp-info-l f-l">
+            	<a href="#"><img src="images/sp-con-l-tu.gif" /></a>
+                <div class="sp-l-b">
+                	<a href="#">四叶草系列</a>
+                	<a href="#">冰粉佳人</a>
+                	<a href="#">澈绿之心</a>
+                	<a href="#">翡翠双环</a>
+                	<a href="#">玫瑰金六芒星</a>
+                	<a href="#">天使之吻</a>
+                	<a href="#">托帕石</a>
+                </div>
             </div>
-            <ul>
-            	<li class="current-li per-li1"><a href="#">消息中心<span>></span></a></li>
-            	<li class="per-li2"><a href="#">个人资料<span>></span></a></li>
-            	<li class="per-li3"><a href="#">我的订单<span>></span></a></li>
-            	<li class="per-li4"><a href="#">我的预约<span>></span></a></li>
-            	<li class="per-li5"><a href="#">购物车<span>></span></a></li>
-            	<li class="per-li6"><a href="#">管理收货地址<span>></span></a></li>
-            	<li class="per-li7"><a href="#">店铺收藏<span>></span></a></li>
-            	<li class="per-li8"><a href="#">购买记录<span>></span></a></li>
-            	<li class="per-li9"><a href="#">浏览记录<span>></span></a></li>
-            	<li class="per-li10"><a href="#">会员积分<span>></span></a></li>
-            </ul>
+        	<ul class="sp-info-r f-r" id="necklaceTop"></ul>
+            <div style="clear:both;"></div>
         </div>
-    	<div class="order-right f-r">
-        	<div class="order-hd">
-            	<dl class="f-l">
-                	<dt>
-                    	<a href="#"><img src="images/data-tu2.gif" /></a>
-                    </dt>
-                    <dd>
-                    	<h3><a href="#">RH了</a></h3>
-                        <p>zhao601884596</p>
-                    </dd>
-                    <div style="clear:both;"></div>
-                </dl>
-                <div class="ord-dai f-l">
-                	<p>待付款<span>1</span></p>
-                	<p>待发货<span>1</span></p>
-                	<p>待收货<span>1</span></p>
-                	<p>待评价<span>1</span></p>
-                </div>
-                <div style="clear:both;"></div>
-            </div>
-            <div class="order-md">
-            	<div class="md-tit">
-                	<h3>我的订单</h3>
-                </div>
-                <div class="md-hd">
-                	<P class="md-p1"><input type="checkbox" name="hobby" value=""></input><span>全选</span></P>
-                    <p class="md-p2">商品信息</p>
-                    <p class="md-p3">规格</p>
-                    <p class="md-p4">单价（元）</p>
-                    <p class="md-p5">金额（元）</p>
-                    <p class="md-p6">操作</p>
-                </div>
-                <div class="md-info">
-                	<div class="dai">
-                    	<input type="checkbox" name="hobby" value=""></input><span>待付款</span>
-                    </div>
-                    <div class="dai-con">
-                    	<dl class="dl1">
-                        	<dt>
-                                <input type="checkbox" name="hobby" value="" class="f-l"></input>
-                                <a href="#" class="f-l"><img src="images/dai.gif" /></a>
-                                <div style="clear:both;"></div>
-                            </dt>
-                            <dd>
-                            	<p>登高阁紫菜肉松鸡蛋卷 海苔蛋卷 糕点江西特产小吃 休闲办公零食</p>
-                                <span>X 1</span>
-                            </dd>
-                            <div style="clear:both;"></div>
-                        </dl>
-                        <div class="dai-right f-l">
-                        	<P class="d-r-p1">颜色：蓝色<br />尺码：XL</P>
-                            <p class="d-r-p2">¥ 66.00</p>
-                            <p class="d-r-p3">¥ 66.00</p>
-                            <p class="d-r-p4"><a href="#">移入收藏夹</a><br /><a href="#">删除</a><br /><a href="#">付款</a></p>
-                        </div>
-                        <div style="clear:both;"></div>
-                    </div>
-                    <div class="dai-con">
-                    	<dl class="dl1">
-                        	<dt>
-                                <input type="checkbox" name="hobby" value="" class="f-l"></input>
-                                <a href="#" class="f-l"><img src="images/dai.gif" /></a>
-                                <div style="clear:both;"></div>
-                            </dt>
-                            <dd>
-                            	<p>登高阁紫菜肉松鸡蛋卷 海苔蛋卷 糕点江西特产小吃 休闲办公零食</p>
-                                <span>X 1</span>
-                            </dd>
-                            <div style="clear:both;"></div>
-                        </dl>
-                        <div class="dai-right f-l">
-                        	<P class="d-r-p1">颜色：蓝色<br />尺码：XL</P>
-                            <p class="d-r-p2">¥ 66.00</p>
-                            <p class="d-r-p3">¥ 66.00</p>
-                            <p class="d-r-p4"><a href="#">移入收藏夹</a><br /><a href="#">删除</a><br /><a href="#">付款</a></p>
-                        </div>
-                        <div style="clear:both;"></div>
-                    </div>
-                </div>
-                <div class="md-info">
-                	<div class="dai">
-                    	<input type="checkbox" name="hobby" value=""></input><span>待发货</span>
-                    </div>
-                    <div class="dai-con">
-                    	<dl class="dl1">
-                        	<dt>
-                                <input type="checkbox" name="hobby" value="" class="f-l"></input>
-                                <a href="#" class="f-l"><img src="images/dai.gif" /></a>
-                                <div style="clear:both;"></div>
-                            </dt>
-                            <dd>
-                            	<p>登高阁紫菜肉松鸡蛋卷 海苔蛋卷 糕点江西特产小吃 休闲办公零食</p>
-                                <span>X 1</span>
-                            </dd>
-                            <div style="clear:both;"></div>
-                        </dl>
-                        <div class="dai-right f-l">
-                        	<P class="d-r-p1">颜色：蓝色<br />尺码：XL</P>
-                            <p class="d-r-p2">¥ 66.00</p>
-                            <p class="d-r-p3">¥ 66.00</p>
-                            <p class="d-r-p4" style="margin-top:20px;"><a href="#">移入收藏夹</a><br /><a href="#">删除</a></p>
-                        </div>
-                        <div style="clear:both;"></div>
-                    </div>
-                </div>
-                <div class="md-info">
-                	<div class="dai">
-                    	<input type="checkbox" name="hobby" value=""></input><span>待收货</span>
-                    </div>
-                    <div class="dai-con">
-                    	<dl class="dl1">
-                        	<dt>
-                                <input type="checkbox" name="hobby" value="" class="f-l"></input>
-                                <a href="#" class="f-l"><img src="images/dai.gif" /></a>
-                                <div style="clear:both;"></div>
-                            </dt>
-                            <dd>
-                            	<p>登高阁紫菜肉松鸡蛋卷 海苔蛋卷 糕点江西特产小吃 休闲办公零食</p>
-                                <span>X 1</span>
-                            </dd>
-                            <div style="clear:both;"></div>
-                        </dl>
-                        <div class="dai-right f-l">
-                        	<P class="d-r-p1" style=" position:relative;top:-20px;">颜色：蓝色<br />尺码：XL</P>
-                            <p class="d-r-p2" style="top:-43px;">¥ 66.00</p>
-                            <p class="d-r-p3" style="top:-43px;">¥ 66.00</p>
-                            <p class="d-r-p4"><a href="#">移入收藏夹</a><br /><a href="#">删除</a><br /><a href="#">确认收货</a><br /><a href="JavaScript:;" ckwl="">查看物流</a></p>
-                        </div>
-                        <div style="clear:both;"></div>
-                    </div>
-                </div>
-                <div class="md-info">
-                	<div class="dai">
-                    	<input type="checkbox" name="hobby" value=""></input><span>待评价</span>
-                    </div>
-                    <div class="dai-con">
-                    	<dl class="dl1">
-                        	<dt>
-                                <input type="checkbox" name="hobby" value="" class="f-l"></input>
-                                <a href="#" class="f-l"><img src="images/dai.gif" /></a>
-                                <div style="clear:both;"></div>
-                            </dt>
-                            <dd>
-                            	<p>登高阁紫菜肉松鸡蛋卷 海苔蛋卷 糕点江西特产小吃 休闲办公零食</p>
-                                <span>X 1</span>
-                            </dd>
-                            <div style="clear:both;"></div>
-                        </dl>
-                        <div class="dai-right f-l">
-                        	<P class="d-r-p1">颜色：蓝色<br />尺码：XL</P>
-                            <p class="d-r-p2">¥ 66.00</p>
-                            <p class="d-r-p3">¥ 66.00</p>
-                            <p class="d-r-p4" style="margin-top:20px;"><a href="#">移入收藏夹</a><br /><a href="#">删除</a></p>
-                        </div>
-                        <div style="clear:both;"></div>
-                    </div>
-                </div>
-                <!--分页-->
-                <div class="paging">
-            	<div class="pag-left f-l">
-                	<a href="#" class="about left-r f-l"><</a>
-                    <ul class="left-m f-l">
-                    	<li><a href="#">1</a></li>
-                        <li class="current"><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">6</a></li>
-                        <li><a href="#">...</a></li>
-                        <li><a href="#">100</a></li>
-                        <div style="clear:both;"></div>
-                    </ul>
-                	<a href="#" class="about left-l f-l">></a>
-                    <div style="clear:both;"></div>
-                </div>
-            	<div class="pag-right f-l">
-                	<div class="jump-page f-l">
-                        到第<input type="text" />页
-                    </div>
-                    <button class="f-l">确定</button>
-                    <div style="clear:both;"></div>
-                </div>
-                <div style="clear:both;"></div>
-            </div>
-                <div class="md-ft">
-                	<P class="md-p1"><input type="checkbox" name="hobby" value=""></input><span>全选</span></P>
-                    <a href="#">删除</a>
-                    <a href="#">加入收藏夹<span>（此处始终在屏幕下方）</span></a>
-                    <button>结算</button>
+        <div class="sp-con-info">
+        	<h3 class="sp-info-tit"><span style="color:#F56904;">2F</span>耳环</h3>
+        	<div class="sp-info-l f-l">
+            	<a href="#"><img src="images/sp-con-l-tu2.gif" /></a>
+                <div class="sp-l-b">
+                	<a href="#">纯金雪灵</a>
+                	<a href="#">浪漫山茶花</a>
+                	<a href="#">南洋大珍珠耳环</a>
+                	<a href="#">森林之声</a>
+                	<a href="#">心中有你</a>
+                	<a href="#">智者永恒</a>
+                	<a href="#">阮仕淡水珍珠</a>
                 </div>
             </div>
-            
+        	<ul class="sp-info-r f-r" id="earringsTop"></ul>
+            <div style="clear:both;"></div>
         </div>
-        <div style="clear:both;"></div>
+        <div class="sp-con-info">
+        	<h3 class="sp-info-tit"><span>3F</span>手链</h3>
+        	<div class="sp-info-l f-l">
+            	<a href="#"><img src="images/sp-con-l-tu.gif" /></a>
+                <div class="sp-l-b">
+                	<a href="#">零食/糖果/巧克力</a>
+                	<a href="#">饼干/糕点</a>
+                	<a href="#">生鲜</a>
+                	<a href="#">酒水饮料/乳饮料</a>
+                	<a href="#">调味/速食</a>
+                	<a href="#">粮油/干货</a>
+                	<a href="#">冲调制品 </a>
+                </div>
+            </div>
+        	<ul class="sp-info-r f-r" id="braceletTop"></ul>
+            <div style="clear:both;"></div>
+        </div>
+        <div class="sp-con-info">
+        	<h3 class="sp-info-tit"><span style="color:#F56904;">4F</span>戒指</h3>
+        	<div class="sp-info-l f-l">
+            	<a href="#"><img src="images/sp-con-l-tu2.gif" /></a>
+                <div class="sp-l-b">
+                	<a href="#">零食/糖果/巧克力</a>
+                	<a href="#">饼干/糕点</a>
+                	<a href="#">生鲜</a>
+                	<a href="#">酒水饮料/乳饮料</a>
+                	<a href="#">调味/速食</a>
+                	<a href="#">粮油/干货</a>
+                	<a href="#">冲调制品 </a>
+                </div>
+            </div>
+        	<ul class="sp-info-r f-r" id="ringTop"></ul>
+            <div style="clear:both;"></div>
+        </div>
+        <div class="sp-con-info">
+        	<h3 class="sp-info-tit"><span style="color:#F56904;">5F</span>手表</h3>
+        	<div class="sp-info-l f-l">
+            	<a href="#"><img src="images/sp-con-l-tu2.gif" /></a>
+                <div class="sp-l-b">
+                	<a href="#">零食/糖果/巧克力</a>
+                	<a href="#">饼干/糕点</a>
+                	<a href="#">生鲜</a>
+                	<a href="#">酒水饮料/乳饮料</a>
+                	<a href="#">调味/速食</a>
+                	<a href="#">粮油/干货</a>
+                	<a href="#">冲调制品 </a>
+                </div>0
+            </div>
+        	<ul class="sp-info-r f-r" id="watchTop"></ul>
+            <div style="clear:both;"></div>
+        </div>
     </div>
     
     <!--底部服务-->
@@ -812,57 +863,101 @@
             <div style="clear:both;"></div>
         </div>
     </div>
-    
+
     <!--底部 版权-->
     <div class="footer w1200">
     	<p>
         	<a href="#">关于我们</a><span>|</span>
         	<a href="#">友情链接</a><span>|</span>
-        	<a href="#">宅客微购社区</a><span>|</span>
+        	<a href="#">小鹰微购社区</a><span>|</span>
         	<a href="#">诚征英才</a><span>|</span>
         	<a href="#">商家登录</a><span>|</span>
         	<a href="#">供应商登录</a><span>|</span>
         	<a href="#">热门搜索</a><span>|</span>
-        	<a href="#">宅客微购新品</a><span>|</span>
+        	<a href="#">小鹰微购新品</a><span>|</span>
         	<a href="#">开放平台</a>
         </p>
         <p>
         	沪ICP备13044278号<span>|</span>合字B1.B2-20130004<span>|</span>营业执照<span>|</span>互联网药品信息服务资格证<span>|</span>互联网药品交易服务资格证
         </p>
     </div>
-    
-    <!--查看物流 弹窗-->
-    <div class="view-logistics">
-    	<div class="view-bg"></div>
-        <div class="view-con">
-        	<div class="view-tit">
-            	<h3>物流信息</h3>
-                <a href="JavaScript:;" guanbi="">
-                	<img src="images/close-select-city.gif" />
-                </a>
-                <div style="clear:both;"></div>
-            </div>
-            <div class="view-bd">
-            	<ul>
-                	<li class="bd-pdl-li after"><span>1</span>2015-08-06　周四　　14:06:53您的订单开始处理</li>
-                	<li class="after"><span>2</span>14:08:44您的订单待配货</li>
-                	<li><span>3</span>14:16:04您的包裹已出库</li>
-                	<li><span>4</span>14:16:03商家正通知快递公司揽件</li>
-                	<li><span>5</span>21:47:54【惠州市】圆通速递 广东省惠州市惠东县收件员 已揽件</li>
-                	<li class="bd-pdb-li"><span>6</span>22:13:51广东省惠州市惠东县公司 已发出</li>
-                    <li class="bd-pdl-li"><span>7</span>2015-08-07　周五　　04:57:33广州转运中心公司 已收入</li>
-                	<li><span>8</span>04:58:54广州转运中心公司 已发出</li>
-                	<li><span>9</span>2015-08-08周六22:46:43重庆转运中心公司 已收入</li>
-                	<li class="bd-pdb-li"><span>10</span>23:01:49【重庆市】重庆转运中心 已发出</li>
-                    <li class="bd-pdl-li"><span>11</span>2015-08-09　周日　　00:57:11【重庆市】快件已到达 重庆市南岸区</li>
-                	<li><span>12</span>11:14:52重庆市南岸区 已收入</li>
-                	<li><span>13</span>11:14:52【重庆市】重庆市南岸区派件员：李天生 13330284757正在为您派件</li>
-                	<li class="bd-bd-li"><span>14</span>15:53:14【重庆市】重庆市南岸区公司 已签收 签收人：保安，感谢使用圆通速递，期待再次为您服务</li>
-                </ul>
-                <p class="sign">您的包裹已被签收！</p>
-            </div>
-        </div>
-    </div>
-    
+
+    <script type="text/javascript">
+        var nowPageNo = 1;
+        var pageSize = 8;
+        queryProductByCategory("项链","#necklaceTop");
+        queryProductByCategory("耳环","#earringsTop");
+        queryProductByCategory("手链","#braceletTop");
+        queryProductByCategory("戒指","#ringTop");
+        queryProductByCategory("手表","#watchTop");
+        //根据类别加载相应的数据
+        function queryProductByCategory(category, id){
+            $.ajax({
+                async: false,
+                url: '/EJS/shopperConsumer/productPage',
+                data: {
+                    "category": category,
+                    "pageNo": nowPageNo,
+                    "pageSize": pageSize
+                },
+                dataType: 'json',
+                success: function (result) {
+                    renderProductHtml(result.items, id);
+                }
+            });
+        }
+
+        //渲染项链模块页面
+        function renderProductHtml(data, id) {
+            var productHtml = "";//用来存储html内容
+            //alert(data.length);
+            if (data.length > 0) {
+                $.each(data, function (v, o) {
+                    productHtml += "<li>";
+                    productHtml += "<div class='li-top'>";
+                    productHtml += "<a href='/EJS/shopperConsumer/detail?name="+o.product_name+"&id="+o.product_id+"' class='li-top-tu'><img src='"+o.product_image+"'/></a>";
+                    productHtml += "<p class='jiage'><span class='sp1'>￥"+o.min_price+"</span>起</p>";
+                    productHtml += "</div>";
+                    productHtml += "<p class='miaoshu'>"+o.product_name+"</p>";
+                    productHtml += "<div class='li-md'>";
+                    productHtml += "<div class='md-l f-l'>";
+                    productHtml += "<p id='product"+o.product_id+"' class='md-l-l f-l' ap=''>1</p>";
+                    productHtml += "<div class='md-l-r f-l'>";
+                    productHtml += "<a href='JavaScript:;' class='md-xs' at='' onclick='add("+o.product_id+")'>∧</a>";
+                    productHtml += "<a href='JavaScript:;' class='md-xx' ab='' onclick='minus("+o.product_id+")'>∨</a>";
+                    productHtml += "</div>";
+                    productHtml += "<div style='clear:both;'></div>";
+                    productHtml += "</div>";
+                    productHtml += "<div class='md-r f-l'>";
+                    productHtml += "<button class='md-l-btn1' onclick=\"window.location.href='/EJS/shopperConsumer/detail?name="+o.product_name+"&id="+o.product_id+"'\">立即购买</button>";
+                    productHtml += "<button class='md-l-btn2' onclick=\"window.location.href='/EJS/shopperConsumer/detail?name="+o.product_name+"&id="+o.product_id+"'\">加入购物车</button>";
+                    productHtml += "</div>";
+                    productHtml += "<div style='clear:both;'></div>";
+                    productHtml += "</div>";
+                    productHtml += "<p class='pingjia'>88888评价</p>";
+                    productHtml += "<p class='weike'>EJS珠宝自营</p>";
+                    productHtml += "</li>";
+                });
+                $(id).html(productHtml);
+            }
+        }
+
+        function add(id){
+            var buttonid = "#product"+id;
+            var num = $(buttonid).text();
+            num++;
+            $(buttonid).text(num);
+        }
+        function minus(id){
+            var buttonid = "#product"+id;
+            var num = $(buttonid).text();
+            if(num > 1){
+                num--;
+                $(buttonid).text(num);
+            }
+
+        }
+
+    </script>
 </body>
 </html>

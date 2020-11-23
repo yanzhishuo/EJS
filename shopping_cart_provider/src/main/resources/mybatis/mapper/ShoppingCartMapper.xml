@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cebbank.shopping_cart_provider.mapper.ShoppingCartMapper">
+    <!--根据用户id查询商品详情id-->
+    <select id="selectShoppingCartDetailByUserLoginId" resultType="java.util.HashMap">
+        select user_shopping_cart_id, user_login_id, usc.product_detail_id, user_shopping_cart_product_num, user_shopping_cart_status,
+        product_detail_image, product_detail_price, product_detail_stock, product_detail_status
+        from user_shopping_cart usc
+        inner join product_detail pd on usc.product_detail_id = pd.product_detail_id
+        where user_login_id = #{userLoginId} and product_detail_status='2' and user_shopping_cart_status= 1
+    </select>
+    <!--    查找购物车信息*  根据用户/商品id -->
+    <select id="selectCartById" parameterType="Integer" resultType="UserShoppingCart">
+        select `user_shopping_cart_id`,`user_login_id`,`product_detail_id`,`user_shopping_cart_product_num`,`user_shopping_cart_status`
+         from user_shopping_cart
+         <where>
+             user_shopping_cart_status='1'
+             <if test="userLoginId != null">
+                 and user_login_id = #{userLoginId}
+             </if>
+             <if test="productDetailId != null">
+                 and product_detail_id = #{productDetailId}
+             </if>
+         </where>
+    </select>
+    <!--    向购物车表中插入一条数据-->
+    <insert id="insertOneItemToShoppingCart" useGeneratedKeys="true" keyProperty="userShoppingCartId" keyColumn="user_shopping_cart_id" parameterType="UserShoppingCart">
+        insert into user_shopping_cart(user_login_id,product_detail_id,user_shopping_cart_product_num)
+        values (#{userLoginId}, #{productDetailId}, #{userShoppingCartProductNum})
+    </insert>
+    <!--更改购物车中某条数据的商品数量-->
+    <update id="updateOneItemInCart">
+        update user_shopping_cart
+        set user_shopping_cart_product_num = #{productNumNew}
+        where user_shopping_cart_status = 1
+        and user_login_id = #{userLoginId} and product_detail_id = #{productDetailId}
+    </update>
+
+    <!--    向购物车表中插入一条数据22222-->
+    <insert id="insertOneItem" useGeneratedKeys="true" keyProperty="userShoppingCartId" keyColumn="user_shopping_cart_id" parameterType="UserShoppingCart">
+        insert into user_shopping_cart(user_login_id,product_detail_id,user_shopping_cart_product_num)
+        values (#{userLoginId}, #{productDetailId}, #{userShoppingCartProductNum})
+    </insert>
+
+    <!--删除用户购物车中的某件商品-->
+    <update id="deleteOneItemFromCartByUserIdAndProductId">
+        update user_shopping_cart
+        set user_shopping_cart_status= 0
+        where user_login_id = #{userLoginId} and product_detail_id = #{productDetailId}
+    </update>
+
+    <!--根据用户id删除购物车中所有的数据-->
+    <update id="deleteAllCartDataByUserId">
+        update user_shopping_cart
+        set user_shopping_cart_status= 0
+        where user_login_id = #{userLoginId}
+    </update>
+<!--根据用户id以及商品详情id更新某条信息的加购数量-->
+    <update id="updateProductNumByUserIdAndProductId">
+        update user_shopping_cart
+        set user_shopping_cart_product_num = #{productNum}
+        where user_login_id = #{userLoginId} and product_detail_id=#{productDetailId}
+        and user_shopping_cart_status=1
+    </update>
+</mapper>
