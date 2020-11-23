@@ -34,7 +34,8 @@ public class OrderController {
      */
     @RequestMapping("/")
     public String queryAllOrder(){
-        return "/shopemp/orderlist";
+
+        return "/orderlist";
     }
     /**
      *更新订单时间和物流状态
