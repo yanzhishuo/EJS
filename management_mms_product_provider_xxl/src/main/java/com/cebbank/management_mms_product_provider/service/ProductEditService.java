@@ -112,5 +112,15 @@ public interface ProductEditService {
      */
     Integer queryOnSaleProduct(Integer productDetailId);
 
+    /**
+     * 查询具有同一product_id的商品的最低价格
+     *
+     * @return
+     */
+    Double minPrice(Integer productId);
 
+    /**
+     *
+     * */
+    Integer findProductIdByDetailId(Integer detailId);
 }

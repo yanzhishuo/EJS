@@ -93,4 +93,14 @@ public class ProductEditServiceImpl implements ProductEditService {
         return productEditMapper.queryOnSaleProduct(productDetailId);
     }
 
+    @Override
+    public Double minPrice(Integer productId) {
+        return productEditMapper.minPrice(productId);
+    }
+
+    @Override
+    public Integer findProductIdByDetailId(Integer detailId) {
+        return productEditMapper.selectProductIdByDetailId(detailId);
+    }
+
 }

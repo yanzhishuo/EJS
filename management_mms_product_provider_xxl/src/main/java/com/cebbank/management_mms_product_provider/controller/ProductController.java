@@ -104,6 +104,29 @@ public class ProductController {
         }
     }
 
+    //lsf
+    @RequestMapping("/judgeproducts")
+    public Integer judgeProducts(@RequestParam Integer productDetailId){
+        //查询具有同一product_id的，且product_detail_status为2的商品数量
+        Integer res = productEditService.queryOnSaleProduct(productDetailId);
+        return res;
+    }
+    //lsf
+//    @RequestMapping("/getProductId")
+//    public Integer findProductIdByDetailId(@RequestParam Integer productDetailId)
+//    {
+//        Integer productId=productEditService.findProductIdByDetailId(productDetailId);
+//        return productDetailId;
+//    }
+    /**
+     * 根据detailId查询productDetail
+     * */
+    @RequestMapping("/getProDetail")
+    ProductDetail findProductDetailByDetailId(@RequestParam Integer productDetailId){
+        ProductDetail productDetail=productEditService.queryProductByproductDetailId(productDetailId);
+        return productDetail;
+    }
+
     @RequestMapping("/updateproduct")
     public Integer updateProduct(@RequestParam Map<String, Object> map) throws InvocationTargetException, IllegalAccessException {
         ProductDetail productDetail = new ProductDetail();
@@ -119,5 +142,9 @@ public class ProductController {
         return productEditService.queryProductsOfCategory(productCategoryId);
     }
 
+    @RequestMapping("/minprice")
+    public Double minPrice(@RequestParam Integer productId){
+        return productEditService.minPrice(productId);
+    }
 
 }

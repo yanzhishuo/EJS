@@ -31,7 +31,7 @@
     </insert>
 
     <insert id="saveProduct" useGeneratedKeys="true" keyProperty="productId">
-        insert into product(`product_no`,`product_name`,`product_desc`,`product_category_id`,`product_create_time`) values(#{productNo},#{productName},#{productDesc},#{productCategoryId},#{productCreateTime})
+        insert into product(`product_no`,`product_name`,`product_image`,`product_desc`,`product_category_id`,`product_create_time`) values(#{productNo},#{productName},#{productImage},#{productDesc},#{productCategoryId},#{productCreateTime})
     </insert>
 
     <select id="queryAllProducts" resultMap="productDetail">
@@ -84,7 +84,6 @@
         (select res.product_id from(select product.product_id from product inner join product_detail on product.product_id = product_detail.product_id where product_detail_id = #{productDetailId}) as res)
     </update>
 
-
     <select id="queryproductCategoryNameByproductDetailId" resultType="string">
         select product_category_name from product_category inner join product inner join product_detail
         on product_category.product_category_id = product.product_category_id
@@ -100,6 +99,16 @@
     <select id="queryOnSaleProduct" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM product_detail WHERE product_id = (SELECT product_id FROM product_detail WHERE product_detail_id =  #{productDetailId})
         and product_detail_status = 2
+    </select>
+
+    <select id="minPrice" resultType="java.lang.Double">
+        SELECT MIN(product_detail_price) FROM product INNER JOIN product_detail
+        ON product_detail.product_id = product.product_id
+        where product.product_id = #{productId}
+    </select>
+
+    <select id="selectProductIdByDetailId" resultType="java.lang.Integer">
+        SELECT product_id FROM product_detail WHERE product_detail_id=#{id}
     </select>
 
 </mapper>

@@ -83,5 +83,10 @@ public class Product extends Model<Product> {
      */
     private Integer productStatus;
 
+    /**
+     * 该种商品最低价格
+     * */
+    private Double lowestPrice;
+
 
 }

@@ -40,4 +40,8 @@ public interface ProductEditMapper {
     Integer updateProductStatusOffSale(Integer productDetailId);
 
     Integer queryOnSaleProduct(Integer productDetailId);
+
+    Double minPrice(Integer productId);
+
+    Integer selectProductIdByDetailId(Integer id);
 }
