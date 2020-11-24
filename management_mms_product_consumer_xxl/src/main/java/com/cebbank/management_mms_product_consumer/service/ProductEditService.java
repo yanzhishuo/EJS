@@ -114,4 +114,23 @@ public interface ProductEditService {
     @RequestMapping("/products/productsofcategory")
     List<Product> queryProductsOfCategory(@RequestParam Integer productCategoryId);
 
+    /**
+     * 查询具有同一product_id的商品的最低价格
+     *
+     * @return
+     */
+    @RequestMapping("/products/minprice")
+    Double minPrice(@RequestParam Integer productId);
+
+    /**
+     * 查询同一productdetail所属product是否还有在销
+     * */
+    @RequestMapping("/products/judgeproducts")
+    Integer judgeProducts(@RequestParam Integer productDetailId);
+
+    /**
+     * 根据detailId查询productDetail
+     * */
+    @RequestMapping("/products/getProDetail")
+    ProductDetail findProductDetailByDetailId(@RequestParam Integer productDetailId);
 }

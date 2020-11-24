@@ -45,7 +45,7 @@ public class ProductDetail extends Model<ProductDetail> {
     /**
      * 商品价格
      */
-    private BigDecimal productDetailPrice;
+    private Double productDetailPrice;
 
     /**
      * 商品库存

@@ -2,6 +2,70 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <header th:replace="shopemp/header::header-fragment">
 </header>
+<script type="text/javascript">
+    var websocket = null;
+    //判断当前浏览器是否支持WebSocket
+    if ('WebSocket' in window) {
+        //这个地方特别坑，建立连接的地址在网上众说纷纭
+        //我个人实现的方法是
+        //ws:如果你是http请求就写ws；如果你是https请求得改成wss
+        //localhost:8080：项目启动地址(本地),如果登陆页面是：http://localhost:8080/login,就用localhsot:8080
+        //websocket:这个写上WebSocketServer类上@ServerEndpoint注解后的value值
+        //uid:这个是传到后台去的登陆id
+        // websocket = new WebSocket("ws://localhost:8081/websocket?uid=6");
+        websocket = new WebSocket("ws://localhost:8081/websocket");
+    } else {
+        alert('当前浏览器 Not support websocket')
+    }
+
+    //连接发生错误的回调方法
+    websocket.onerror = function () {
+        setMessageInnerHTML("WebSocket连接发生错误");
+    };
+
+    //连接成功建立的回调方法
+    websocket.onopen = function () {
+        // setMessageInnerHTML("WebSocket连接成功");
+    }
+
+    //接收到消息的回调方法
+    websocket.onmessage = function (res) {
+        // alert(res.data);
+        setMessageInnerHTML(res.data);
+    }
+
+
+    //连接关闭的回调方法
+    websocket.onclose = function () {
+        // setMessageInnerHTML("WebSocket连接关闭");
+    }
+
+    //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+    window.onbeforeunload = function () {
+        closeWebSocket();
+    }
+
+    //将消息显示在网页上，3秒后消失
+    function setMessageInnerHTML(innerHTML) {
+        document.getElementById('message').innerHTML += innerHTML + '<br/>';
+        setTimeout(hideMessage,3000);
+    }
+    function hideMessage()
+    {
+        document.getElementById('message').style.display='none'
+    };
+
+    //关闭WebSocket连接
+    function closeWebSocket() {
+        websocket.close();
+    }
+
+    //发送消息，这是websocket的实时消息
+    function send() {
+        var message = document.getElementById('text').value;
+        websocket.send(message);
+    }
+</script>
 <style>
     .ui-jqgrid tr.jqgrow td {
         white-space: normal !important;
@@ -50,7 +114,7 @@
             <div class="container-fluid">
                 <div class="card card-primary card-outline">
                     <div class="card-header">
-                        <h3 class="card-title">商品管理</h3>
+                        <h3 class="card-title">商品管理</h3><span style="color: #b21f2d;font-size: xx-large" id="message"></span>
                     </div> <!-- /.card-body -->
                     <div style="color: #ac2925;margin-left: 60px" th:text="'您的角色:'+${session.user.shopEmpRoleName}" th:if="${not #strings.isEmpty(session.user)}"></div>
                     <div class="card-body">

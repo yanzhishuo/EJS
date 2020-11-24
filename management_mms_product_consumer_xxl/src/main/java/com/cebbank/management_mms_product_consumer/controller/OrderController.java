@@ -19,16 +19,6 @@ import java.util.UUID;
 public class OrderController {
     @Autowired
     OrderService orderService;
-//    /**
-//     *订单页显示
-//     */
-//    @RequestMapping("/")
-//    public String queryAllOrder(Model model){
-//
-//        List<Order> orderList=orderService.queryAllOrder();
-//        model.addAttribute("orderList",orderList);
-//        return "orderlist";
-//    }
     /**
      *订单页显示
      */

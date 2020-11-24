@@ -1,7 +1,6 @@
 var editorD;
 
 $(function () {
-
     //富文本编辑器 用于商品详情编辑
     const E = window.wangEditor;
     editorD = new E('#wangEditor')

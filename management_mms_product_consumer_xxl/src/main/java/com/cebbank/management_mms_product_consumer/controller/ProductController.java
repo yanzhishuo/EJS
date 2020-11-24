@@ -5,18 +5,23 @@ import com.cebbank.management_mms_product_consumer.common.pojo.ProductCategory;
 import com.cebbank.management_mms_product_consumer.common.pojo.ProductDetail;
 import com.cebbank.management_mms_product_consumer.common.util.Result;
 import com.cebbank.management_mms_product_consumer.common.util.ResultGenerator;
+import com.cebbank.management_mms_product_consumer.service.ElasticSearchService;
 import com.cebbank.management_mms_product_consumer.service.ProductCategoryService;
 import com.cebbank.management_mms_product_consumer.service.ProductEditService;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.sound.midi.Soundbank;
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,25 +43,9 @@ public class ProductController {
     @Autowired
     private ProductEditService productEditService;
 
-//    @GetMapping("/products")
-//    public String goodsPage(HttpServletRequest request) {
-//        List<ProductDetail> productDetailList = productEditService.queryAllProducts();
-//        for(ProductDetail productDetail:productDetailList)
-//        {
-//            if (productDetail.getProductDetailStatus() == 1){
-//                productDetail.setProductDetailStatusValue("待审核");
-//            }
-//            if (productDetail.getProductDetailStatus() == 2){
-//                productDetail.setProductDetailStatusValue("销售中");
-//            }
-//            if (productDetail.getProductDetailStatus() == 3){
-//                productDetail.setProductDetailStatusValue("已下架");
-//            }
-//        }
-//        request.setAttribute("path", "products");
-//        request.setAttribute("productDetailList", productDetailList);
-//        return "shopemp/products";
-//    }
+    @Autowired
+    private ElasticSearchService elasticSearchService;
+
 
     @GetMapping("/products")
     public String goodsPage(HttpServletRequest request) {
@@ -70,7 +59,6 @@ public class ProductController {
         if (StringUtils.isEmpty(params.get("page")) || StringUtils.isEmpty(params.get("limit"))) {
             return ResultGenerator.genFailResult("参数异常！");
         }
-//        PageQueryUtil pageUtil = new PageQueryUtil(params);
         return ResultGenerator.genSuccessResult(productEditService.getProductPage(params));
     }
 
@@ -78,6 +66,16 @@ public class ProductController {
     @RequestMapping(value = "/product/onsale/{id}", method = {RequestMethod.POST, RequestMethod.GET})
     public String productOnSale(@PathVariable("id") Integer id) {
         productEditService.productOnSale(id);
+        //上架同时在elasticsearch中新增商品信息
+        ProductDetail productDetail=productEditService.findProductDetailByDetailId(id);
+        if (null!=productDetail.getProduct())
+        {
+            Product product=productDetail.getProduct();
+            product.setProductId(productDetail.getProductId());
+            Double minprice=productEditService.minPrice(productDetail.getProductId());
+            product.setLowestPrice(minprice);
+            elasticSearchService.addEsProduct(product);
+        }
         return "redirect:/shopemp/products";
     }
 
@@ -85,6 +83,12 @@ public class ProductController {
     @RequestMapping(value = "/product/offsale/{id}", method = {RequestMethod.POST, RequestMethod.GET})
     public String productOffSale(@PathVariable("id") Integer id) {
         productEditService.productOffSale(id);
+        //下架同时判断该productDetail同属product是否还有，无则在elasticsearch中删除该product
+        if(productEditService.judgeProducts(id)==0)
+        {
+            Integer productId=productEditService.findProductDetailByDetailId(id).getProductId();
+            elasticSearchService.removeEsProduct(productId);
+        }
         return "redirect:/shopemp/products";
     }
 
@@ -124,7 +128,6 @@ public class ProductController {
         return "shopemp/product_addproperty";
     }
 
-    //    @PostMapping(value = "/product/saveproperty")
     @RequestMapping(value = "/product/saveproperty")
     public String toEdit(HttpServletRequest request, ProductDetail productDetail) {
         productEditService.saveProductDetail(productDetail);
@@ -134,12 +137,16 @@ public class ProductController {
     /**
      * 保存新增商品信息
      */
-//    @RequestMapping(value = "/product/save", method = RequestMethod.POST)
     @RequestMapping(value = "/product/save")
-//    @ResponseBody
-    public String saveProduct(@RequestParam Map<String, Object> map) throws InvocationTargetException, IllegalAccessException {
+    public String saveProduct(@RequestParam("productImage") MultipartFile productImage, @RequestParam Map<String, Object> map) throws InvocationTargetException, IllegalAccessException, IOException {
         Product product = new Product();
+        String filename=System.currentTimeMillis()+productImage.getOriginalFilename();
+        String path=System.getProperty("user.dir")+"\\management_mms_product_consumer_xxl\\src\\main\\resources\\static\\images\\";
+        File file=new File(path+filename);
+        productImage.transferTo(file);
         ProductDetail productDetail = new ProductDetail();
+        map.put("productImage","/images/"+filename);
+        map.forEach((k,v)-> System.out.println(k+";"+v));
         BeanUtils.populate(product, map);
         BeanUtils.populate(productDetail, map);
         if (StringUtils.isEmpty(productDetail.getProductPropertyValue())
@@ -153,6 +160,22 @@ public class ProductController {
         productEditService.save(map);
         return "redirect:/shopemp/products";
     }
+//    public String saveProduct(@RequestParam Map<String, Object> map) throws InvocationTargetException, IllegalAccessException {
+//        Product product = new Product();
+//        ProductDetail productDetail = new ProductDetail();
+//        BeanUtils.populate(product, map);
+//        BeanUtils.populate(productDetail, map);
+//        if (StringUtils.isEmpty(productDetail.getProductPropertyValue())
+//                || StringUtils.isEmpty(productDetail.getProductDetailPrice())
+//                || StringUtils.isEmpty(productDetail.getProductDetailStock())
+//                || StringUtils.isEmpty(product.getProductNo())
+//                || StringUtils.isEmpty(product.getProductName())
+//                || StringUtils.isEmpty(product.getProductDesc())) {
+//            return "rrr/error";
+//        }
+//        productEditService.save(map);
+//        return "redirect:/shopemp/products";
+//    }
 
     /**
      * 跳到商品信息编辑界面
@@ -161,7 +184,6 @@ public class ProductController {
     public String toEditPage(@PathVariable("id") Integer id, HttpServletRequest request) {
         ProductDetail productDetail = productEditService.queryProductByproductDetailId(id);
         String productCategoryName = productEditService.queryproductCategoryNameByproductDetailId(id);
-//        System.out.println(productCategoryName);
         request.setAttribute("path", "edit");
         request.setAttribute("productDetail", productDetail);
         request.setAttribute("productCategoryName", productCategoryName);
@@ -171,10 +193,25 @@ public class ProductController {
     /**
      * 修改商品信息，只能修改价格,库存和商品描述
      */
-//    @RequestMapping(value = "/product/modify", method = RequestMethod.POST)
     @RequestMapping(value = "/product/modify")
     public String editProduct(@RequestParam Map<String, Object> map) {
         productEditService.updateProduct(map);
+        map.forEach((k,v)-> System.out.println(k+":"+v));
+        //lsf,修改商品属性的同时在elasticsearch中修改
+        Product product=new Product();
+        Double lowPrice;
+        if (null!=map.get("productId"))
+        {
+            product.setProductId(Integer.parseInt((String)map.get("productId")));
+            lowPrice=productEditService.minPrice(Integer.parseInt((String)map.get("productId")));
+            product.setLowestPrice(lowPrice);
+        }
+        if (null!=map.get("productName"))
+            product.setProductName((String) map.get("productName"));
+        if (null!=map.get("productImage"))
+            product.setProductImage((String)map.get("productImage"));
+        elasticSearchService.editProduct(product);
+
         return "redirect:/shopemp/products";
     }
 

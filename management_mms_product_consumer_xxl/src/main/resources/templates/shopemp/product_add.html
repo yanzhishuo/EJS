@@ -45,7 +45,7 @@
                     <div class="card-body">
                         <!--                        <form id="productsForm" onsubmit="return false;">-->
                         <!--                        <form id="productsForm" action="/shopemp/product/save" method="post">-->
-                        <form id="productsForm" action="">
+                        <form id="productsForm" action="" enctype="multipart/form-data" method="post">
                             <div class="form-group" style="display:flex;">
                                 <label class="control-label">请选择分类:&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                 <select class="form-control col-sm-3" name="productCategoryId"
@@ -84,22 +84,12 @@
                                        name="productDetailStock"
                                        placeholder="*请输入商品库存数" required="true"/>
                             </div>
-                            <!--                            <div class="form-group">-->
-                            <!--                                <label class="control-label">商品状态:&nbsp;</label>-->
-                            <!--                                <input name="productStatus" type="radio" checked=true value="1"/>&nbsp;待审核&nbsp;-->
-                            <!--                                <input name="productStatus" type="radio" value="2" />&nbsp;上架&nbsp;-->
-                            <!--                                <input name="productStatus" type="radio" value="3" />&nbsp;下架&nbsp;-->
-                            <!--                            </div>-->
-                            <!--                            <div class="form-group">-->
-                            <!-- 按钮 -->
-                            <!--                                <button class="btn btn-info float-right" style="margin-left: 5px;"-->
-                            <!--                                        id="saveButton">保存商品-->
-                            <!--                                </button>   -->
-                            <!--                                &nbsp-->
-                            <!--                                &nbsp;<button class="btn btn-secondary float-right" style="margin-left: 5px;"-->
-                            <!--                                              id="cancelButton">返回商品列表-->
-                            <!--                            </button>&nbsp;-->
-                            <!--                            </div>-->
+                            <br>
+                            <div class="form-group">
+                                <div>
+                                    <input type="file" style="color: #17a2b8;width: 100px" name="productImage" accept="image/*">
+                                </div>
+                            </div>
                             <br>
                             <div>
                                 <input id="button1" type="submit" value="保存商品"

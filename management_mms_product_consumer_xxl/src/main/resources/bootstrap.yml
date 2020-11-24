@@ -19,6 +19,26 @@ spring:
     allow-bean-definition-overriding: true
   thymeleaf:
     cache: false
+  rabbitmq:
+    host: 121.196.107.230
+    port: 5672
+    username: admin
+    password: 123456
+    virtual-host: /
+    listener:
+      simple:
+        concurrency: 10           #消费者数量
+        max-concurrency: 10
+        prefetch: 1               #每次取几个
+        auto-startup: true        #默认listener自动启动
+        default-requeue-rejected: true    #消费者消费失败将消息重新压入队列
+    template:
+      retry:
+        enabled: true
+        initial-interval: 1000
+        max-attempts: 3
+        max-interval: 10000
+        multiplier: 1.0
 
 
 

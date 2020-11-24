@@ -12,7 +12,7 @@ $(function () {
                 name: 'product.productImage',
                 index: 'product.productImage',
                 width: 80,
-                formatter: coverImageFormatter
+                formatter: coverImageFormatter(name)
             },
             {label: '库存', name: 'productDetailStock', index: 'productDetailStock', width: 60},
             {label: '售价', name: 'productDetailPrice', index: 'productDetailPrice', width: 60},

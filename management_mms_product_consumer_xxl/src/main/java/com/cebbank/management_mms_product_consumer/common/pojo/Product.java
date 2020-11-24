@@ -76,6 +76,10 @@ public class Product extends Model<Product> {
      * 商品状态，0删除，1待审核，2上架，3下架
      */
     private Integer productStatus;
+    /**
+     * 该种商品最低价格
+     * */
+    private Double lowestPrice;
 
 
 }
