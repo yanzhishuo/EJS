@@ -24,6 +24,51 @@ baidu:
     app-key: ftA1aAiNou3t9QKZFdnqvbTX # API Key
     secret-key: fmSwWSRLN1T5UiPlCStoL5T4ctn9qtGN # Secret Key
 
+# for kaptcha
+kaptcha:
+  border:
+    enabled: true
+    color: '200,200,200'
+    thickness: 1
+  noise:
+    color: '239,166,131'
+    impl:
+  obscurificator:
+    impl:
+  producer:
+    impl:
+  background:
+    impl:
+    color-from: '255,0,0'
+    color-to: '255,0,0'
+  text-producer:
+    impl:
+    character:
+      string: '01234567890ABCDEF'
+      length: 4
+      space: 10
+    font:
+      names:
+      color: '255,255,255'
+      size: 46
+  word:
+    impl:
+  image:
+    width: 200
+    height: 60
+  items:
+    home:
+      path: /home/captcha
+      session:
+        key: homeCaptcha
+        date: homeCaptchaDate
+      background:
+        color-from: '255,255,255'
+        color-to: '255,255,255'
+      text-producer:
+        font:
+          color: '68,155,44'
+
 #ribbon:
 #  ReadTimeout: 60000
 #  ConnectTimeout: 60000

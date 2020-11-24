@@ -9,11 +9,14 @@ import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Random;
 
 @Controller
@@ -36,7 +39,8 @@ public class LogisticEmpLoginController {
         if (success) {
             session.setAttribute("user", user);
             //返回首页
-            return "logisticsList.html";//index redirect:/logisticsList.html
+            return "caplogin.html";
+           // return "logisticsList.html";//index redirect:/logisticsList.html
         } else {
             //给一点错误信息
             model.addAttribute("error", "用户名或者密码错误！！");
@@ -44,6 +48,7 @@ public class LogisticEmpLoginController {
         }
 
     }
+
 
 
     //用户注册

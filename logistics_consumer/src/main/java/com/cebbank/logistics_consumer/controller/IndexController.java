@@ -42,4 +42,10 @@ public class IndexController {
         return "facer";
     }
 
+    @RequestMapping("/caplogin")
+    public String jump2() {
+        return "caplogin";
+    }
+
+
 }
