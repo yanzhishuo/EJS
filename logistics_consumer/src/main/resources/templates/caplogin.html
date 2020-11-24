@@ -1,0 +1,66 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+    <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" type="text/javascript" rel="stylesheet">
+    <link href="css/bootsnav.css" type="text/css" rel="stylesheet">
+    <link href="css/normalize.css" type="text/css" rel="stylesheet">
+    <link href="css/css.css" rel="stylesheet" type="text/css">
+    <script src="js/jquery-1.11.0.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="js/bootsnav.js" type="text/javascript"></script>
+    <script src="js/jquery1.js" type="text/javascript"></script>
+    <!--[if IE]>
+    <script src="js/html5.js"></script><![endif]-->
+    <title>后台管理员登录</title>
+</head>
+
+<body class="logobg_style">
+<div id="large-header" class="large-header login-page">
+    <canvas id="demo-canvas" width="1590" height="711"></canvas>
+    <div class="login-form">
+        <div class="login-content">
+            <h1 class="title_name">图形验证码</h1>
+
+            <form action="check" method="post">
+                <label for="captcha">
+<!--                    验证码:-->
+                    <input id="captcha" type="text" name="captcha" placeholder="请输入验证码">
+                </label>
+                <h11 class="title_name">不区分大小写</h11>
+                <br>
+                <img src="/home/captcha" style="cursor: pointer" title="click to refresh" alt="captcha" onclick="changeImg(this)">
+                <br>
+                <br> <br>
+                <input type="submit" value="submit">
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+<script src="js/TweenLite/TweenLite.min.js"></script>
+<script src="js/TweenLite/EasePack.min.js"></script>
+<script src="js/TweenLite/rAF.js"></script>
+<script src="js/TweenLite/demo-1.js"></script>
+<script type="text/javascript">
+
+    function changeImg(obj) {
+        obj.src = '/home/captcha?t=' + Math.random();
+    }
+</script>
+</body>
+</html>
