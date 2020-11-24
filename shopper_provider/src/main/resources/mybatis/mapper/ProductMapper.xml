@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cebbank.shopper_provider.mapper.ProductMapper">
+	<!--查询商品的详细信息-->
+    <select id="selectProductsInfoByParam" resultType="Product">
+		select product_id,product_no,product_name,product_image,product_category_id,product_desc,product_sold_amount,product_onsale_time,product_status
+		from product
+		<where>
+			product_status='2'
+			<if test="categoryId != null">
+				and product_category_id = #{categoryId}
+			</if>
+		</where>
+
+	</select>
+	<!--查询商品的名称和价格（首页用）-->
+	<select id="selectProductsByParam" resultType="java.util.HashMap">
+		select p.product_id,product_name,product_category_id,min(product_detail_price) min_price,product_sold_amount,
+		product_image,product_detail_status,product_status
+		from product p
+		inner join product_detail pd on p.product_id=pd.product_id
+		<where>
+			product_status='1' and product_detail_status='2'
+			<if test="categoryId != null">
+				and product_category_id = #{categoryId}
+			</if>
+		</where>
+		group by p.product_id
+		order by product_sold_amount
+	</select>
+	<!--商品详情页信息  暂时没用到-->
+	<select id="selectProductsDetailByParam" resultType="ProductDetail">
+		select p.product_id,product_no,product_name,product_image,product_desc,product_sold_amount,pd.product_property_id,product_property_name,product_property_value,
+		product_detail_price,product_detail_status,product_status
+		from product p
+		inner join product_detail pd on p.product_id=pd.product_id
+		inner join product_property pp on pd.product_property_id=pp.product_property_id
+		<where>
+			product_status='1' and product_detail_status='2'
+			<if test="propertyValue != null and propertyValue != ''">
+				and product_property_value = #{propertyValue}
+			</if>
+		</where>
+	</select>
+	<!--商品详情页信息 通过商品id查询-->
+	<select id="selectProductsDetailByIdAndProperty" resultType="ProductDetail">
+		select product_detail_id, p.product_id, product_image, product_property_name, product_property_value,
+		product_detail_price, product_detail_stock ,product_detail_status, product_detail_image
+		from product p
+		inner join product_detail pd on p.product_id=pd.product_id
+		inner join product_property pp on pd.product_property_id=pp.product_property_id
+		<where>
+			product_detail_status='2'
+			<if test="productId != null and productId != ''">
+				and p.product_id = #{productId}
+			</if>
+		</where>
+	</select>
+
+</mapper>

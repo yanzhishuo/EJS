@@ -1,0 +1,105 @@
+spring:
+  application:
+    name: service-logistics-consumer
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: SERVICE-CONFIG-SERVER
+      fail-fast: true
+      label: main
+      name: application
+      profile: main
+  profiles:
+    active: dev
+server:
+  port: 8783
+
+baidu:
+  # 人脸识别
+  humaface:
+    app-name: login-face
+    # 应用名称
+    app-id: 23012020  # appID
+    app-key: ftA1aAiNou3t9QKZFdnqvbTX # API Key
+    secret-key: fmSwWSRLN1T5UiPlCStoL5T4ctn9qtGN # Secret Key
+
+# for kaptcha
+kaptcha:
+  border:
+    enabled: true
+    color: '200,200,200'
+    thickness: 1
+  noise:
+    color: '239,166,131'
+    impl:
+  obscurificator:
+    impl:
+  producer:
+    impl:
+  background:
+    impl:
+    color-from: '255,0,0'
+    color-to: '255,0,0'
+  text-producer:
+    impl:
+    character:
+      string: '01234567890ABCDEF'
+      length: 4
+      space: 10
+    font:
+      names:
+      color: '255,255,255'
+      size: 46
+  word:
+    impl:
+  image:
+    width: 200
+    height: 60
+  items:
+    home:
+      path: /home/captcha
+      session:
+        key: homeCaptcha
+        date: homeCaptchaDate
+      background:
+        color-from: '255,255,255'
+        color-to: '255,255,255'
+      text-producer:
+        font:
+          color: '68,155,44'
+
+#ribbon:
+#  ReadTimeout: 60000
+#  ConnectTimeout: 60000
+  #  cloud:
+  #    config:
+  #      discovery:
+  #        enabled: true
+  #        service-id: SERVICE-CONFIG-SERVER
+  #      fail-fast: true
+  #  profiles:
+  #    active: dev
+  #数据库相关配置
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/ejs?characterEncoding=utf-8&serverTimezone=UTC
+#    username: root
+#    dbcp2:
+#      min-idle: 5                                           # 数据库连接池的最小维持连接数
+#      initial-size: 5                                       # 初始化连接数
+#      max-total: 5                                          # 最大连接数
+#      max-wait-millis: 200                                  # 等待连接获取的最大超时时间
+
+#mybatis:
+  #  #指定全局配置文件位置
+  #  config-location: classpath:mybatis/config/mybatis-config.xml
+  # 所有Entity别名类所在包
+  #  type-aliases-package: com.cebbank.logistics_provider.common.pojo
+  #指定sql映射文件位置
+#  mapper-locations:
+#    - classpath:mybatis/mapper/*.xml
+
+#eureka:
+#  client:
+#    service-url:
+#      default-zone: http://localhost:8761/eureka/

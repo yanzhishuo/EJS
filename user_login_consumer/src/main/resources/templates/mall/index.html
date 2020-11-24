@@ -5,5 +5,29 @@
 </head>
 <body>
 欢迎
+
+
+<!--<a th:href="@{'http://localhost:9000/EJS/shopperConsumer/category?token='+${token}}">跳到首页</a>-->
+<script>
+    window.onload = function(){
+        // alert("hhh");
+        // var t= [[${token}]];
+        // var t="${token}";
+        // console.log("kkkk");
+        console.log('[[${token}]]');
+        let token = '[[${token}]]';
+        window.localStorage.setItem("token",token);
+        alert(window.localStorage.getItem("token"))
+    }
+</script>
 </body>
+<!--<script>-->
+<!--    // function register(e) {-->
+<!--    //     alert(e)-->
+<!--    //     }-->
+<!--  let token = [[${token}]];-->
+<!--  alert(token);-->
+<!--  // window.localStorage.setItem("token",token);-->
+<!--  // alert(window.localStorage.getItem("token"));-->
+<!--</script>-->
 </html>

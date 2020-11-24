@@ -26,6 +26,36 @@ zuul:
       # 参数key结构： zuul.routes.customName.url=xxx
       # url用于配置符合path的请求路径路由到的服务地址。
       url: http://localhost:7778/
-      serviceId: service-buyer-consumers
+      serviceId: service-buyer-consumer
+
+    service-shopper-consumer:
+      path: /shopperConsumer/**
+      # 参数key结构： zuul.routes.customName.url=xxx
+      # url用于配置符合path的请求路径路由到的服务地址。
+      url: http://localhost:8091/
+      serviceId: service-shopper-consumer
+
+    service-shopper-provider:
+      path: /shopperProvider/**
+      # 参数key结构： zuul.routes.customName.url=xxx
+      # url用于配置符合path的请求路径路由到的服务地址。
+      url: http://localhost:8081/
+      serviceId: service-shopper-provider
+
+    service-shoppingcartprovider:
+      path: /shoppingcartprovider/**
+      url: http://localhost:8082/
+      serviceId: service-shopping-cart-provider
+
+    service-order-provider:
+      path: /orderprovider/**
+      url: http://localhost:7887/
+      serviceId: service-order-provider
+
+    service-order-consumer:
+      path: /orderconsumer/**
+      url: http://localhost:7889/
+      serviceId: service-order-consumer
+
   prefix: /EJS
   add-host-header: true
