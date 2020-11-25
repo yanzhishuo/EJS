@@ -10,3 +10,6 @@
 - 图形验证码 
 - 手机验证码 
 - 人脸 
+
+- rabbitmq
+- elasticserach
